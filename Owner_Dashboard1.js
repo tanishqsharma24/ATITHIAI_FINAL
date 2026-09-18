@@ -34,6 +34,7 @@ const I = {
   menu: p => <Icon {...p} path={<path d="M4 7h16M4 12h16M4 17h16"/>} />,
   arrowUp: p => <Icon {...p} path={<path d="M12 19V5M5 12l7-7 7 7"/>} />,
   arrowDown: p => <Icon {...p} path={<path d="M12 5v14M19 12l-7 7-7-7"/>} />,
+  mic: p => <Icon {...p} path={<><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></>} />,
 };
 
 /* ---------------- mock data ---------------- */
@@ -146,7 +147,7 @@ const NAV = [
   { section:"Compliance", items:[ {icon:"clipboard", label:"Overview"}, {icon:"clipboard", label:"Requirements"}, {icon:"clipboard", label:"Calendar"}, {icon:"clipboard", label:"Inspections"} ] },
   { section:null, items:[ {icon:"folder", label:"Documents"}, {icon:"card", label:"Payments"} ] },
   { section:"Service Quality", items:[ {icon:"star", label:"Reviews"}, {icon:"star", label:"Complaints"}, {icon:"star", label:"AI Insights"} ] },
-  { section:null, items:[ {icon:"bar", label:"Analytics"}, {icon:"users", label:"Staff"}, {icon:"bell", label:"Notifications"}, {icon:"sparkles", label:"Ask AtithiAI", id:"ask"}, {icon:"settings", label:"Settings"} ] },
+  { section:null, items:[ {icon:"bar", label:"Analytics"}, {icon:"users", label:"Staff"}, {icon:"bell", label:"Notifications"}, {icon:"sparkles", label:"ATITHIAI Agent", id:"ask"}, {icon:"settings", label:"Settings"} ] },
 ];
 
 function Sidebar({ open, onClose, active, setActive, onAsk }) {
@@ -240,17 +241,60 @@ function AskAtithiAI({ onClose }) {
   useEffect(()=>{ if(bodyRef.current) bodyRef.current.scrollTop = bodyRef.current.scrollHeight; }, [messages]);
   const ask = (q) => {
     if(!q.trim()) return;
-    const answer = AI_ANSWERS[q] || "Here's a quick take based on today's operations data — arrivals, compliance and maintenance all look on track, with the items already flagged in your Daily Briefing needing the closest attention.";
-    setMessages(m => [...m, {role:"user", text:q}, {role:"ai", text:answer}]);
+    let answer = "";
+    let tools = [];
+    if (window.AtithiAiAgent) {
+      const res = window.AtithiAiAgent.process(q, 'owner');
+      answer = res.responseText;
+      tools = res.executedTools || [];
+    } else {
+      answer = AI_ANSWERS[q] || "Here's a quick take based on today's operations data — arrivals, compliance and maintenance all look on track, with the items already flagged in your Daily Briefing needing the closest attention.";
+    }
+    setMessages(m => [...m, {role:"user", text:q}, {role:"ai", text:answer, tools}]);
     setInput("");
   };
+  const [listening, setListening] = useState(false);
+  const handleVoice = () => {
+    const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRec) {
+      setListening(true);
+      setTimeout(() => {
+        setInput("Check inventory stock and alert on low threshold items");
+        setListening(false);
+      }, 700);
+      return;
+    }
+    try {
+      const rec = new SpeechRec();
+      rec.continuous = false;
+      rec.interimResults = true;
+      rec.lang = 'en-IN';
+      rec.onstart = () => setListening(true);
+      rec.onresult = e => {
+        let text = '';
+        for (let i = e.resultIndex; i < e.results.length; i++) text += e.results[i][0].transcript;
+        if (text) setInput(text);
+      };
+      rec.onerror = () => setListening(false);
+      rec.onend = () => setListening(false);
+      rec.start();
+    } catch(err) {
+      setListening(false);
+    }
+  };
+
   return (
     <div className="overlay-bg" onClick={onClose}>
-      <div className="ai-modal" onClick={e=>e.stopPropagation()}>
+      <div className="ai-modal" onClick={e=>e.stopPropagation()} style={{maxWidth:660}}>
         <div className="ai-modal-head">
-          <div>
-            <div className="ai-modal-title">✨ Ask AtithiAI</div>
-            <div className="ai-modal-sub">What would you like to know?</div>
+          <div style={{display:'flex', alignItems:'center', gap:10}}>
+            <div style={{width:34, height:34, borderRadius:10, background:'linear-gradient(233deg, #00B1C5 1%, #EE6481 94%)', display:'flex', alignItems:'center', justifyContent:'center'}}>
+              <I.sparkles size={18} color="#fff"/>
+            </div>
+            <div>
+              <div className="ai-modal-title">ATITHIAI Agent <span style={{fontSize:11, background:'rgba(0,177,197,0.15)', color:'#00e0fa', padding:'2px 7px', borderRadius:10, border:'1px solid rgba(0,177,197,0.3)', marginLeft:6}}>Claude Sonnet 5</span></div>
+              <div className="ai-modal-sub">Operations & Travel Intelligence · 18 Data Table Tools & Slack Active</div>
+            </div>
           </div>
           <button className="drawer-close" style={{position:'static'}} onClick={onClose}><I.x size={15}/></button>
         </div>
@@ -260,15 +304,27 @@ function AskAtithiAI({ onClose }) {
               {Object.keys(AI_ANSWERS).map((q,i)=>(
                 <button key={i} onClick={()=>ask(q)}>→ {q}</button>
               ))}
+              <button onClick={()=>ask("Check inventory status and threshold alerts")}>→ Check inventory status and threshold alerts</button>
+              <button onClick={()=>ask("Show active tasks and overdue SLA matrix")}>→ Show active tasks and overdue SLA matrix</button>
             </div>
           )}
           {messages.map((m,i)=>(
-            <div key={i} className={`chat-bubble ${m.role}`}>{m.text}</div>
+            <div key={i} className={`chat-bubble ${m.role}`}>
+              {m.tools && m.tools.length > 0 && (
+                <div style={{marginBottom:6, padding:'4px 8px', background:'rgba(0,0,0,0.3)', borderRadius:6, fontSize:11, color:'#00e0fa'}}>
+                  ⚡ <strong>Tools Executed:</strong> {m.tools.map(t=>t.name).join(', ')}
+                </div>
+              )}
+              {m.text}
+            </div>
           ))}
         </div>
         <div className="ai-modal-input">
-          <input placeholder="Ask anything..." value={input} onChange={e=>setInput(e.target.value)}
+          <input placeholder={listening ? "Listening... speak now" : "Ask operations query, inspect tasks, or check inventory..."} value={input} onChange={e=>setInput(e.target.value)}
             onKeyDown={e=>{ if(e.key==='Enter') ask(input); }} />
+          <button type="button" className={`icon-btn ${listening ? 'listening-mic' : ''}`} title="Tap to speak (Voice typing)" onClick={handleVoice} style={{background:'rgba(255,255,255,0.06)', borderRadius:8, width:34, height:34, display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer', border:'1px solid rgba(255,255,255,0.1)'}}>
+            <I.mic size={15} color={listening ? '#ef4444' : 'currentColor'} />
+          </button>
           <button className="btn primary" onClick={()=>ask(input)}>Send</button>
         </div>
       </div>
@@ -291,7 +347,7 @@ function Header({ onMenu, onSearch, onAsk, onBell, isOnline }) {
           <span className="status-dot" style={{background: isOnline? '#10B981':'#F59E0B'}}></span>
           {isOnline ? 'Online' : 'Offline'}
         </div>
-        <button className="ask-ai-btn" onClick={onAsk}><I.sparkles size={15}/> Ask AtithiAI</button>
+        <button className="ask-ai-btn" onClick={onAsk}><I.sparkles size={15}/> ATITHIAI Agent</button>
         <button className="icon-btn" onClick={onBell}><I.bell size={16}/><span className="dot-badge"></span></button>
         <div style={{position:'relative'}}>
           <button className="profile-btn" onClick={()=>setProfileOpen(o=>!o)}>
@@ -328,7 +384,7 @@ function AIBriefing({ onAsk }) {
       </div>
       <div className="ai-actions">
         <button className="btn primary">View All Priorities</button>
-        <button className="btn" onClick={onAsk}>Ask AtithiAI</button>
+        <button className="btn" onClick={onAsk}>ATITHIAI Agent</button>
       </div>
     </Card>
   );
@@ -710,12 +766,20 @@ function App() {
     scrollTo(map[id]);
   };
 
+  const openAgent = () => {
+    if (window.AtithiAiAgent) {
+      window.AtithiAiAgent.open({ context: 'owner' });
+    } else {
+      setAskOpen(true);
+    }
+  };
+
   return (
     <div className="app">
-      <Sidebar open={sidebarOpen} onClose={()=>setSidebarOpen(false)} active={active} setActive={setActive} onAsk={()=>setAskOpen(true)} />
+      <Sidebar open={sidebarOpen} onClose={()=>setSidebarOpen(false)} active={active} setActive={setActive} onAsk={openAgent} />
 
       <div className="main">
-        <Header onMenu={()=>setSidebarOpen(true)} onSearch={()=>setSearchOpen(true)} onAsk={()=>setAskOpen(true)}
+        <Header onMenu={()=>setSidebarOpen(true)} onSearch={()=>setSearchOpen(true)} onAsk={openAgent}
           onBell={()=>scrollTo('notifications-section')} isOnline={syncMode!=='offline'} />
 
         <div className="content">
@@ -736,7 +800,7 @@ function App() {
             {DATA.kpis.map((k,i)=>(<KPICard key={k.id} k={k} idx={i} onOpen={handleKpiOpen} />))}
           </div>
 
-          <AIBriefing onAsk={()=>setAskOpen(true)} />
+          <AIBriefing onAsk={openAgent} />
 
           <div className="grid grid-2 section-gap">
             <OperationsCard />

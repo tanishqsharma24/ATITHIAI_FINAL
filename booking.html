@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-black text-white">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AtithiAI Stays — Zero Brokerage Small Hotels & Homestays</title>
+  <meta name="description" content="Direct booking portal for authentic small hotels, homestays, and rural accommodations. Zero brokerage fees and offline check-in passes for remote destinations.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="booking.css">
+  <link rel="stylesheet" href="atithiai-n8n-agent.css">
+</head>
+<body>
+
+  <!-- Ambient Glow Lighting -->
+  <div class="ambient-glow-layer" aria-hidden="true">
+    <div class="ambient-orb ambient-orb-1"></div>
+    <div class="ambient-orb ambient-orb-2"></div>
+    <div class="ambient-orb ambient-orb-3"></div>
+  </div>
+
+  <div class="page-wrapper">
+
+    <!-- Top Navigation Header -->
+    <header class="booking-header">
+      <div class="header-inner">
+        <a href="Atithiai_Landing.Page1.html" class="brand-logo" title="AtithiAI Home">
+          <span class="brand-text">ATITHIAI</span>
+          <span class="brand-tag">STAYS</span>
+        </a>
+
+        <!-- Middle Trust Badge -->
+        <div class="trust-badge-nav">
+          <span class="trust-dot"></span>
+          <span>0% Brokerage · Direct to Local Hosts</span>
+        </div>
+
+        <!-- Right Header Actions -->
+        <div class="header-actions">
+          <a href="auth.html" class="nav-portal-link" id="header-auth-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+            <span id="nav-user-label">Portal Sign In</span>
+          </a>
+          <a href="Customer_Dashboard1.html" class="nav-dashboard-link" title="My Guest Stay">
+            <span>My Stay</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="booking-main">
+
+      <!-- Hero & Mission Section -->
+      <section class="booking-hero">
+        <div class="hero-badge">DIRECT HOSPITALITY PLATFORM</div>
+        <h1 class="hero-title">Book Authentic Homestays.<br>Support Local Hosts Directly.</h1>
+        <p class="hero-subtitle">
+          Eliminate high OTA commissions (0% brokerage). Specially built for small hotels, heritage havelis, and rural stays in destinations where connectivity is limited, featuring offline-ready digital check-in passes.
+        </p>
+
+        <!-- Search Bar Card -->
+        <div class="search-card">
+          <form id="search-form" class="search-form" autocomplete="off">
+            
+            <!-- Field 1: Destination -->
+            <div class="search-field flex-2">
+              <label for="search-location">Destination / Location</label>
+              <div class="search-input-wrap">
+                <svg class="field-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.1 7-11.5A7 7 0 0 0 5 9.5C5 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+                <input type="text" id="search-location" placeholder="e.g. Udaipur, Kumbhalgarh, Jaisalmer..." value="">
+              </div>
+            </div>
+
+            <!-- Field 2: Check-In -->
+            <div class="search-field flex-1">
+              <label for="search-checkin">Check-In</label>
+              <div class="search-input-wrap">
+                <svg class="field-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <input type="date" id="search-checkin" required>
+              </div>
+            </div>
+
+            <!-- Field 3: Check-Out -->
+            <div class="search-field flex-1">
+              <label for="search-checkout">Check-Out</label>
+              <div class="search-input-wrap">
+                <svg class="field-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <input type="date" id="search-checkout" required>
+              </div>
+            </div>
+
+            <!-- Field 4: Stay Type -->
+            <div class="search-field flex-1">
+              <label for="search-stay-type">Stay Category</label>
+              <select id="search-stay-type" class="search-select">
+                <option value="all">All Stay Types</option>
+                <option value="Homestay">Heritage Homestay</option>
+                <option value="Eco-Stay">Rural Eco-Stay</option>
+                <option value="Haveli">Boutique Haveli</option>
+                <option value="Mountain">Mountain Cabin</option>
+                <option value="Riverfront">Riverfront Cottage</option>
+              </select>
+            </div>
+
+            <!-- Submit Search Button -->
+            <button type="submit" id="btn-search-stays" class="btn-search">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <span>Search</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Quick Destination Tags -->
+        <div class="quick-destinations">
+          <span class="quick-label">Popular Rural & Heritage Stays:</span>
+          <button type="button" class="quick-chip" data-loc="Udaipur">Udaipur (Pichola Lake)</button>
+          <button type="button" class="quick-chip" data-loc="Kumbhalgarh">Kumbhalgarh (Aravalli Hills)</button>
+          <button type="button" class="quick-chip" data-loc="Jaisalmer">Jaisalmer (Fort & Thar)</button>
+          <button type="button" class="quick-chip" data-loc="Kaza">Spiti Valley (Kaza)</button>
+          <button type="button" class="quick-chip" data-loc="Rishikesh">Rishikesh (Ganges)</button>
+        </div>
+      </section>
+
+      <!-- AtithiAI Stay Matcher Section -->
+      <section class="ai-matcher-bar">
+        <div class="ai-matcher-inner">
+          <div class="ai-matcher-icon">✦</div>
+          <div class="ai-matcher-content">
+            <div class="ai-matcher-title">AtithiAI Direct Stay Intelligence</div>
+            <div class="ai-matcher-subtitle">Ask the AI agent to match verified small hotels and homestays by connectivity, budget, or experience</div>
+          </div>
+          <div class="ai-matcher-input-row">
+            <input type="text" id="ai-prompt-input" placeholder="e.g. Find an offline eco-homestay near Kumbhalgarh with solar power and home food..." autocomplete="off">
+            <button type="button" id="btn-ask-ai-matcher" class="btn-ai-match">
+              <span>Ask AtithiAI</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- AI Recommendation Result Banner (Dynamic) -->
+        <div id="ai-recommendation-box" class="ai-recommendation-box hidden">
+          <div class="ai-rec-header">
+            <span class="ai-rec-badge">✦ ATITHIAI MATCH RECOMMENDATION</span>
+            <button type="button" id="btn-close-ai-rec" class="btn-close-rec">✕</button>
+          </div>
+          <p id="ai-rec-text" class="ai-rec-text"></p>
+        </div>
+      </section>
+
+      <!-- Stay Listings Section -->
+      <section class="listings-section">
+        <div class="listings-header">
+          <div>
+            <h2 class="section-heading">Verified Local Homestays & Small Hotels</h2>
+            <p class="section-subtext">Zero brokerage · 100% direct payment to local hosts · Offline check-in pass included</p>
+          </div>
+          <div class="sort-controls">
+            <span id="results-count" class="results-count">Showing 5 authentic stays</span>
+          </div>
+        </div>
+
+        <!-- Property Cards Grid -->
+        <div id="properties-grid" class="properties-grid">
+          <div class="loading-state">
+            <div class="spinner"></div>
+            <p>Loading authentic homestays...</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Interactive Direct Booking Modal -->
+    <div id="booking-modal-overlay" class="modal-overlay hidden" aria-hidden="true">
+      <div class="modal-container" role="dialog" aria-modal="true" aria-labelledby="modal-prop-title">
+        
+        <div class="modal-header">
+          <div>
+            <div class="modal-badge">DIRECT 0% BROKERAGE BOOKING</div>
+            <h3 id="modal-prop-title" class="modal-title">Property Name</h3>
+            <p id="modal-prop-location" class="modal-sub">Location</p>
+          </div>
+          <button type="button" id="btn-close-modal" class="modal-close-btn" aria-label="Close modal">✕</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="modal-columns">
+            
+            <!-- Left Column: Form Details -->
+            <div class="modal-col-main">
+              <form id="direct-booking-form" class="direct-booking-form" autocomplete="on">
+                
+                <!-- Room Selection -->
+                <div class="form-block">
+                  <label class="block-label">Select Room / Cottage</label>
+                  <div id="room-selection-cards" class="room-selection-cards">
+                    <!-- Dynamic room radio cards -->
+                  </div>
+                </div>
+
+                <!-- Dates & Guests Review -->
+                <div class="form-grid-2">
+                  <div class="modal-field">
+                    <label for="modal-checkin">Check-In Date</label>
+                    <input type="date" id="modal-checkin" required>
+                  </div>
+                  <div class="modal-field">
+                    <label for="modal-checkout">Check-Out Date</label>
+                    <input type="date" id="modal-checkout" required>
+                  </div>
+                </div>
+
+                <!-- Guest Personal Details -->
+                <div class="form-block">
+                  <div class="block-label">Guest Contact Details</div>
+                  
+                  <div class="form-grid-2">
+                    <div class="modal-field">
+                      <label for="guest-name">Full Name <span class="req">*</span></label>
+                      <input type="text" id="guest-name" required placeholder="e.g. Dev Sharma">
+                    </div>
+                    <div class="modal-field">
+                      <label for="guest-phone">Phone / WhatsApp <span class="req">*</span></label>
+                      <input type="tel" id="guest-phone" required placeholder="+91 98765 00000">
+                    </div>
+                  </div>
+
+                  <div class="modal-field">
+                    <label for="guest-email">Email Address <span class="req">*</span></label>
+                    <input type="email" id="guest-email" required placeholder="guest@domain.com">
+                  </div>
+
+                  <div class="modal-field">
+                    <label for="guest-requests">Special Requests / Village Pickup Note</label>
+                    <textarea id="guest-requests" rows="2" placeholder="e.g. Traveling by train, need station pickup from village. Pure vegetarian food."></textarea>
+                  </div>
+                </div>
+
+                <!-- Payment Preference -->
+                <div class="form-block">
+                  <div class="block-label">Payment Mode (No OTA Hidden Fees)</div>
+                  <div class="payment-options">
+                    <label class="payment-card selected">
+                      <input type="radio" name="payment_method" value="arrival" checked>
+                      <div class="payment-meta">
+                        <span class="payment-title">💵 Pay on Arrival to Host</span>
+                        <span class="payment-desc">Pay directly via Cash or Local UPI when you reach the homestay. Recommended for low network areas.</span>
+                      </div>
+                    </label>
+
+                    <label class="payment-card">
+                      <input type="radio" name="payment_method" value="upi">
+                      <div class="payment-meta">
+                        <span class="payment-title">⚡ Instant Host UPI / QR</span>
+                        <span class="payment-desc">Direct peer-to-peer payment directly to host's UPI account with 0% gateway commission.</span>
+                      </div>
+                    </label>
+
+                    <label class="payment-card">
+                      <input type="radio" name="payment_method" value="card">
+                      <div class="payment-meta">
+                        <span class="payment-title">💳 Debit / Credit Card / NetBanking</span>
+                        <span class="payment-desc">Secure online payment with instant digital receipt.</span>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+
+                <button type="submit" id="btn-confirm-booking" class="btn-confirm-booking">
+                  <span class="btn-text">Confirm Direct Booking & Generate Pass</span>
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </button>
+              </form>
+            </div>
+
+            <!-- Right Column: Transparent Pricing & Summary -->
+            <div class="modal-col-summary">
+              <div class="price-summary-card">
+                <h4 class="summary-title">Reservation Summary</h4>
+                
+                <div class="summary-row">
+                  <span id="summary-stay-name">Amargarh Heritage Stay</span>
+                  <span id="summary-room-name">Deluxe Room</span>
+                </div>
+
+                <div class="summary-row">
+                  <span>Stay Duration:</span>
+                  <span id="summary-nights-calc">2 Nights (2 Adults)</span>
+                </div>
+
+                <hr class="summary-divider">
+
+                <div class="summary-row">
+                  <span>Standard OTA Rate:</span>
+                  <span id="summary-ota-price" class="ota-strike">₹9,200</span>
+                </div>
+
+                <div class="summary-row highlight-savings">
+                  <span>AtithiAI 0% Brokerage Savings:</span>
+                  <span id="summary-brokerage-savings">- ₹1,600</span>
+                </div>
+
+                <div class="summary-row">
+                  <span>Direct Host Price:</span>
+                  <span id="summary-base-price">₹7,600</span>
+                </div>
+
+                <div class="summary-row">
+                  <span>Taxes & Village Amenities:</span>
+                  <span id="summary-taxes">Included</span>
+                </div>
+
+                <hr class="summary-divider">
+
+                <div class="summary-row total-row">
+                  <span>Total Amount Payable:</span>
+                  <span id="summary-total-price" class="total-amount">₹7,600</span>
+                </div>
+
+                <!-- Offline Guarantee Notice -->
+                <div class="offline-guarantee-pill">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  <span>Offline Digital Pass with QR will be generated instantly. Works with zero cellular coverage.</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Confirmation & Offline Pass Modal -->
+    <div id="confirmation-modal-overlay" class="modal-overlay hidden" aria-hidden="true">
+      <div class="modal-container confirmation-container">
+        <div class="confirmation-head">
+          <div class="success-icon-wrap">✓</div>
+          <h2>Booking Confirmed Direct with Host!</h2>
+          <p class="conf-sub">Your stay is reserved in the AtithiAI Offline PMS and synced with the host's arrival dashboard.</p>
+        </div>
+
+        <!-- Offline Digital Check-in Pass Card -->
+        <div class="digital-pass-card" id="digital-pass-to-print">
+          <div class="pass-header">
+            <div>
+              <div class="pass-tag">ATITHIAI OFFLINE CHECK-IN PASS</div>
+              <div class="pass-prop" id="pass-prop-name">Amargarh Heritage Stay</div>
+              <div class="pass-loc" id="pass-prop-city">Udaipur, Rajasthan</div>
+            </div>
+            <div class="pass-ref-block">
+              <span class="ref-label">BOOKING REF</span>
+              <strong class="ref-code" id="pass-ref-code">ATI-2026-8492</strong>
+            </div>
+          </div>
+
+          <div class="pass-body">
+            <div class="pass-grid">
+              <div>
+                <span class="pass-lbl">GUEST NAME</span>
+                <strong id="pass-guest-name">Dev Sharma</strong>
+              </div>
+              <div>
+                <span class="pass-lbl">ROOM ASSIGNMENT</span>
+                <strong id="pass-room-type">Deluxe Heritage Room</strong>
+              </div>
+              <div>
+                <span class="pass-lbl">CHECK-IN</span>
+                <strong id="pass-checkin">Sep 18, 2026 (14:00)</strong>
+              </div>
+              <div>
+                <span class="pass-lbl">CHECK-OUT</span>
+                <strong id="pass-checkout">Sep 20, 2026 (11:00)</strong>
+              </div>
+              <div>
+                <span class="pass-lbl">PAYMENT STATUS</span>
+                <strong id="pass-payment" class="text-emerald">Pay on Arrival (Confirmed)</strong>
+              </div>
+              <div>
+                <span class="pass-lbl">HOST DIRECT PHONE</span>
+                <strong id="pass-host-phone">+91 98290 12345</strong>
+              </div>
+            </div>
+
+            <!-- Simulated QR Code for Offline Verification -->
+            <div class="pass-qr-box">
+              <div class="qr-visual">
+                <svg width="90" height="90" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm13-2h3v2h-3v-2zm-5 0h2v3h-2v-3zm3 3h2v2h-2v-2zm2 2h3v3h-3v-3zm-5 1h2v2h-2v-2zm-3-1v2h2v-2H9zm3-3h2v2h-2v-2zm5-2h2v2h-2v-2z"/>
+                </svg>
+              </div>
+              <div class="qr-text">
+                <strong>Offline-Verification Code</strong>
+                <span>Present this QR or booking reference at check-in. Host's offline OS can verify without internet access.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="confirmation-actions">
+          <button type="button" class="btn-print-pass" onclick="window.print()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            <span>Save / Print Offline Pass</span>
+          </button>
+          
+          <a href="Customer_Dashboard1.html" class="btn-to-dashboard">
+            <span>Open in Guest Stay Dashboard</span>
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="booking-footer">
+      <div class="footer-inner">
+        <p>© 2026 AtithiAI. Empowering India’s small hotels, homestays, and rural hosts with 0% brokerage and offline PMS intelligence.</p>
+        <div class="footer-links">
+          <a href="Atithiai_Landing.Page1.html">Home</a>
+          <a href="auth.html">Portal Login</a>
+          <a href="Customer_Dashboard1.html">Guest Dashboard</a>
+          <a href="Owner_Dashboard2.html">Owner Dashboard</a>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="booking.js"></script>
+</body>
+</html>

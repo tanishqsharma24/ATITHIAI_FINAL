@@ -31,40 +31,8 @@
   --scrollbar-thumb:rgba(255,255,255,0.12);
   --radius:20px;
 }
-html[data-theme="light"]{
-  --bg:#F3F5F8;
-  --text:#12141A;
-  --text-60:rgba(18,20,26,0.62);
-  --text-40:rgba(18,20,26,0.42);
-  --accent:#0057E0;
-  --accent-glow:rgba(0,87,224,0.10);
-  --success:#0D9668;
-  --warning:#B45309;
-  --error:#DC2626;
-  --border:rgba(18,20,26,0.10);
-  --border-soft:rgba(18,20,26,0.06);
-  --border-hover:rgba(18,20,26,0.2);
-  --glass:rgba(255,255,255,0.65);
-  --glass-2:rgba(255,255,255,0.85);
-  --glass-hover:rgba(18,20,26,0.06);
-  --input-bg:rgba(18,20,26,0.045);
-  --panel-bg-1:rgba(255,255,255,0.78);
-  --panel-bg-2:rgba(255,255,255,0.68);
-  --canvas-overlay:linear-gradient(180deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.7) 40%, #F3F5F8 85%);
-  --surface:#FFFFFF;
-  --surface-90:rgba(255,255,255,0.92);
-  --accent-soft-text:#0057E0;
-  --ai-text-color:#101828;
-  --chat-ai-text:#1B2333;
-  --star-empty:rgba(18,20,26,0.18);
-  --tint-green:#047857;
-  --tint-teal:#0F766E;
-  --tint-amber:#92400E;
-  --scrollbar-thumb:rgba(18,20,26,0.18);
-  --radius:20px;
-}
 *{box-sizing:border-box; margin:0; padding:0;}
-html,body{background:var(--bg); color:var(--text); transition:background 0.2s, color 0.2s;}
+html,body{background:var(--bg); color:var(--text);}
 body{
   font-family:'DM Sans', sans-serif;
   font-size:14px;
@@ -82,14 +50,6 @@ a{color:inherit; text-decoration:none;}
 @media (prefers-reduced-motion: reduce){
   *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
 }
-
-/* ---------- theme toggle ---------- */
-.theme-toggle{
-  position:relative; width:36px; height:36px; border-radius:10px; border:1px solid var(--border);
-  background:var(--glass); display:flex; align-items:center; justify-content:center; color:var(--text-60);
-  transition:background 0.15s, color 0.15s;
-}
-.theme-toggle:hover{background:var(--glass-2); color:var(--text);}
 
 /* ---------- ambient background ---------- */
 .bg-fallback{position:fixed; inset:0; z-index:-1; background:var(--bg); transition:background 0.2s;}

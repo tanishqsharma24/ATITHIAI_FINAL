@@ -15,37 +15,8 @@
   --glass-2:rgba(255,255,255,0.045);
   --radius:20px;
 }
-html[data-theme="light"]{
-  --bg:#F6F7F9;
-  --text:#0B0D12;
-  --text-60:rgba(11,13,18,0.62);
-  --text-40:rgba(11,13,18,0.42);
-  --border:rgba(11,13,18,0.10);
-  --border-soft:rgba(11,13,18,0.06);
-  --glass:rgba(11,13,18,0.035);
-  --glass-2:rgba(11,13,18,0.05);
-}
 *{box-sizing:border-box; margin:0; padding:0;}
 html,body{background:#000; color:var(--text);}
-html[data-theme="light"], html[data-theme="light"] body{background:var(--bg);}
-
-/* ---------- theme toggle switch ---------- */
-.theme-toggle{
-  position:relative; width:46px; height:26px; border-radius:20px; flex-shrink:0;
-  border:1px solid var(--border); background:var(--glass); padding:0;
-  display:flex; align-items:center; transition:background 0.2s, border-color 0.2s;
-}
-.theme-toggle .knob{
-  position:absolute; top:2px; left:2px; width:20px; height:20px; border-radius:50%;
-  background:linear-gradient(135deg,#ffd76a,#ffb020); color:#3a2600;
-  display:flex; align-items:center; justify-content:center;
-  transition:transform 0.25s ease, background 0.25s ease, color 0.25s ease;
-}
-html[data-theme="light"] .theme-toggle .knob{
-  transform:translateX(20px);
-  background:linear-gradient(135deg,#0f172a,#334155); color:#e2e8f0;
-}
-.theme-toggle .knob svg{width:12px; height:12px;}
 body{
   font-family:'DM Sans', sans-serif;
   font-size:14px;
@@ -68,9 +39,7 @@ a{color:inherit; text-decoration:none;}
 /* ---------- background: scroll-scrubbing frame canvas ---------- */
 .bg-fallback{position:fixed; inset:0; z-index:-1; background:#000;}
 #animation-canvas{
-  position:fixed; top:0; left:0; width:100vw; height:100vh;
-  display:block; z-index:0; pointer-events:none;
-  image-rendering:-webkit-optimize-contrast; image-rendering:auto;
+  display: none !important;
 }
 .bg-canvas-overlay{
   position:fixed; inset:0; z-index:0; pointer-events:none;
@@ -370,33 +339,3 @@ tr:last-child td{border-bottom:none;}
 }
 .fade-up{animation:fadeUp 0.5s cubic-bezier(.2,.8,.2,1) both;}
 @keyframes fadeUp{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:translateY(0)}}
-
-/* ---------- light theme: hardcoded-color overrides ---------- */
-html[data-theme="light"] ::-webkit-scrollbar-thumb{background:rgba(11,13,18,0.15);}
-html[data-theme="light"] .nav-item:hover{background:rgba(11,13,18,0.05);}
-html[data-theme="light"] .card:hover{border-color:rgba(11,13,18,0.16);}
-html[data-theme="light"] .btn{background:rgba(11,13,18,0.045);}
-html[data-theme="light"] .btn:hover{background:rgba(11,13,18,0.09);}
-html[data-theme="light"] .room-tile{background:rgba(11,13,18,0.025);}
-html[data-theme="light"] .room-tile:hover{border-color:rgba(11,13,18,0.2);}
-html[data-theme="light"] .priority-item{background:rgba(11,13,18,0.03);}
-html[data-theme="light"] .stat-pill{background:rgba(11,13,18,0.03);}
-html[data-theme="light"] .search-bar:hover{border-color:rgba(11,13,18,0.18);}
-html[data-theme="light"] .c-vacant{background:rgba(11,13,18,0.3);}
-html[data-theme="light"] .progress-track, html[data-theme="light"] .method-bar{background:rgba(11,13,18,0.08);}
-html[data-theme="light"] .dev-toggle button{background:transparent; color:var(--text-40);}
-html[data-theme="light"] .dev-toggle button.active{background:rgba(11,13,18,0.08); color:var(--text);}
-html[data-theme="light"] .cmdk{background:#ffffff;}
-html[data-theme="light"] .overlay-bg{background:rgba(11,13,18,0.35);}
-html[data-theme="light"] .ai-card{background:linear-gradient(135deg, rgba(0,102,255,0.08), rgba(11,13,18,0.02)); border-color:rgba(0,102,255,0.2);}
-html[data-theme="light"] .ai-head{color:#1d4ed8;}
-html[data-theme="light"] .ai-text{color:#111827;}
-html[data-theme="light"] .alert-card{background:linear-gradient(135deg, rgba(245,158,11,0.10), rgba(11,13,18,0.02));}
-html[data-theme="light"] .alert-head{color:#92660a;}
-html[data-theme="light"] .table-action{background:rgba(0,102,255,0.08);}
-html[data-theme="light"] .toast{background:#ffffff; color:var(--text); border:1px solid var(--border); box-shadow:0 10px 30px rgba(11,13,18,0.12);}
-html[data-theme="light"] .bg-canvas-overlay{
-  background:
-    radial-gradient(ellipse 900px 500px at 20% 0%, rgba(0,102,255,0.06), transparent 60%),
-    linear-gradient(180deg, rgba(246,247,249,0.55) 0%, rgba(246,247,249,0.85) 40%, #F6F7F9 85%);
-}

@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-black text-white">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AtithiAI — Hospitality Portal Login & Registration</title>
+  <meta name="description" content="Secure role-based login and sign-up portal for Property Owners, Operations Staff, and Guests.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+  <!-- Ambient Glowing Background -->
+  <div class="ambient-glow-layer" aria-hidden="true">
+    <div class="ambient-orb ambient-orb-1"></div>
+    <div class="ambient-orb ambient-orb-2"></div>
+    <div class="ambient-orb ambient-orb-3"></div>
+  </div>
+
+  <div class="auth-wrapper">
+
+    <!-- Top Navigation Header -->
+    <header class="auth-header">
+      <div class="header-inner">
+        <a href="Atithiai_Landing.Page1.html" class="brand-logo" title="Back to AtithiAI Home">
+          <span class="brand-text">ATITHIAI</span>
+          <span class="brand-tag">PORTAL</span>
+        </a>
+
+        <div class="header-actions">
+          <div class="status-indicator" title="Connected to Local SQLite Database Engine">
+            <span class="status-dot"></span>
+            <span class="status-text">Server & DB Active</span>
+          </div>
+          <a href="Atithiai_Landing.Page1.html" class="nav-back-link">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            <span>Back to Home</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Card Container -->
+    <main class="auth-main-container">
+
+      <!-- Step 1: Role Selection Screen -->
+      <section id="role-selection-view" class="auth-card role-selection-card">
+        <div class="card-header text-center">
+          <div class="badge-pill">STEP 1 OF 2</div>
+          <h1 class="main-title">Select Your Role</h1>
+          <p class="subtitle">Choose your hospitality role to continue to your dedicated workspace or stay</p>
+        </div>
+
+        <div class="role-grid">
+          
+          <!-- Role 1: Owner -->
+          <div class="role-card" data-role="owner" id="role-card-owner" tabindex="0" role="button" aria-label="Select Property Owner Role">
+            <div class="role-card-glow"></div>
+            <div class="role-icon-wrap owner-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 21h18"/>
+                <path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"/>
+                <path d="M9 7h1"/>
+                <path d="M9 11h1"/>
+                <path d="M9 15h1"/>
+                <path d="M14 7h1"/>
+                <path d="M14 11h1"/>
+                <path d="M14 15h1"/>
+              </svg>
+            </div>
+            <div class="role-content">
+              <div class="role-badge">HOST & OPERATIONS</div>
+              <h3 class="role-title">Property Owner</h3>
+              <p class="role-desc">Full control over room inventory, pricing, revenue, staff assignments, and guest arrivals.</p>
+              <div class="role-features">
+                <span>✓ Revenue Analytics</span>
+                <span>✓ PMS & Occupancy</span>
+                <span>✓ Task Delegation</span>
+              </div>
+            </div>
+            <div class="role-action-arrow">
+              <span>Select Role</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </div>
+          </div>
+
+          <!-- Role 2: Worker / Staff -->
+          <div class="role-card" data-role="worker" id="role-card-worker" tabindex="0" role="button" aria-label="Select Operations Worker Role">
+            <div class="role-card-glow"></div>
+            <div class="role-icon-wrap worker-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+              </svg>
+            </div>
+            <div class="role-content">
+              <div class="role-badge">STAFF & CREW</div>
+              <h3 class="role-title">Operations Worker</h3>
+              <p class="role-desc">Real-time task queue for Housekeeping, Maintenance tickets, and Front Desk room coordination.</p>
+              <div class="role-features">
+                <span>✓ Live Task Board</span>
+                <span>✓ Status Toggles</span>
+                <span>✓ Offline Ready</span>
+              </div>
+            </div>
+            <div class="role-action-arrow">
+              <span>Select Role</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </div>
+          </div>
+
+          <!-- Role 3: Customer / Guest -->
+          <div class="role-card" data-role="customer" id="role-card-customer" tabindex="0" role="button" aria-label="Select Guest Role">
+            <div class="role-card-glow"></div>
+            <div class="role-icon-wrap customer-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+              </svg>
+            </div>
+            <div class="role-content">
+              <div class="role-badge">GUEST EXPERIENCE</div>
+              <h3 class="role-title">Guest / Traveler</h3>
+              <p class="role-desc">Manage your reservation, order room services, request housekeeping, report issues, and write reviews.</p>
+              <div class="role-features">
+                <span>✓ Room Services</span>
+                <span>✓ Instant Issue Reporting</span>
+                <span>✓ Stay Reviews</span>
+              </div>
+            </div>
+            <div class="role-action-arrow">
+              <span>Select Role</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Step 2: Authentication Form (Sign In & Sign Up Tabs) -->
+      <section id="auth-form-view" class="auth-card form-card hidden">
+
+        <!-- Active Role Banner -->
+        <div class="active-role-bar">
+          <div class="active-role-pill">
+            <span class="role-icon-mini" id="current-role-icon">🏨</span>
+            <span>Continuing as <strong id="current-role-label">Property Owner</strong></span>
+          </div>
+          <button type="button" id="change-role-btn" class="change-role-btn" title="Choose a different role">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+            <span>Change Role</span>
+          </button>
+        </div>
+
+        <!-- Tab Toggle Buttons -->
+        <div class="auth-tabs" role="tablist">
+          <button type="button" class="tab-btn active" id="tab-btn-signin" role="tab" aria-selected="true">
+            Sign In
+          </button>
+          <button type="button" class="tab-btn" id="tab-btn-signup" role="tab" aria-selected="false">
+            Create Account
+          </button>
+        </div>
+
+        <!-- Alert Notification Box -->
+        <div id="auth-alert" class="auth-alert hidden" role="alert">
+          <span class="alert-icon">ℹ️</span>
+          <span class="alert-message" id="alert-message"></span>
+        </div>
+
+        <!-- ========================================================
+             SIGN IN FORM
+             ======================================================== -->
+        <form id="signin-form" class="auth-form" autocomplete="on">
+          <div class="form-group">
+            <label for="signin-email">Email Address</label>
+            <div class="input-wrap">
+              <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <input type="email" id="signin-email" name="email" placeholder="name@domain.com" required autocomplete="email">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="label-row">
+              <label for="signin-password">Password</label>
+              <a href="#" class="forgot-link" onclick="alert('Demo Mode: Use password123 or select quick-fill demo below.'); return false;">Forgot password?</a>
+            </div>
+            <div class="input-wrap">
+              <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <input type="password" id="signin-password" name="password" placeholder="••••••••" required autocomplete="current-password">
+              <button type="button" class="toggle-password-btn" data-target="signin-password" aria-label="Toggle password visibility">
+                👁️
+              </button>
+            </div>
+          </div>
+
+          <div class="form-row-between">
+            <label class="remember-wrap">
+              <input type="checkbox" id="remember-me" checked>
+              <span>Keep me signed in</span>
+            </label>
+          </div>
+
+          <button type="submit" id="btn-submit-signin" class="submit-btn">
+            <span class="btn-text">Sign In to Dashboard</span>
+            <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+
+          <!-- Quick-Fill Demo Account Button -->
+          <div class="demo-quickfill-box">
+            <div class="demo-label">TESTING & DEMO</div>
+            <button type="button" id="btn-quick-demo" class="demo-fill-btn">
+              ⚡ Fill Demo <span id="demo-role-name">Owner</span> Credentials
+            </button>
+            <div class="demo-hint" id="demo-credentials-text">
+              Demo: <code>owner@atithiai.com</code> | <code>password123</code>
+            </div>
+          </div>
+        </form>
+
+        <!-- ========================================================
+             SIGN UP FORM (TOURISM & BOOKING PLATFORM STYLE)
+             ======================================================== -->
+        <form id="signup-form" class="auth-form hidden" autocomplete="off">
+          
+          <!-- Basic Info (Common to all roles) -->
+          <div class="form-section-title">Personal & Contact Details</div>
+          
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="signup-name">Full Name <span class="req">*</span></label>
+              <div class="input-wrap">
+                <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <input type="text" id="signup-name" name="name" placeholder="e.g. Vikram Rathore" required>
+              </div>
+            </div>
+
+            <div class="form-group flex-1">
+              <label for="signup-phone">Phone Number <span class="req">*</span></label>
+              <div class="input-wrap">
+                <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                <input type="tel" id="signup-phone" name="phone" placeholder="+91 98290 00000" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="signup-email">Email Address <span class="req">*</span></label>
+            <div class="input-wrap">
+              <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <input type="email" id="signup-email" name="email" placeholder="name@domain.com" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group flex-1">
+              <label for="signup-password">Create Password <span class="req">*</span></label>
+              <div class="input-wrap">
+                <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <input type="password" id="signup-password" name="password" placeholder="Min. 6 characters" required minlength="6">
+                <button type="button" class="toggle-password-btn" data-target="signup-password">👁️</button>
+              </div>
+            </div>
+
+            <div class="form-group flex-1">
+              <label for="signup-password-confirm">Confirm Password <span class="req">*</span></label>
+              <div class="input-wrap">
+                <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <input type="password" id="signup-password-confirm" placeholder="Repeat password" required minlength="6">
+              </div>
+            </div>
+          </div>
+
+          <!-- ==========================================
+               ROLE-SPECIFIC FIELDS: OWNER
+               ========================================== -->
+          <div id="fields-owner" class="role-specific-section">
+            <div class="form-section-title">Property & Hospitality Details</div>
+            
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label for="owner-prop-name">Property / Hotel Name <span class="req">*</span></label>
+                <input type="text" id="owner-prop-name" placeholder="e.g. Shivam Palace Haveli" class="form-input">
+              </div>
+              <div class="form-group flex-1">
+                <label for="owner-prop-type">Property Category</label>
+                <select id="owner-prop-type" class="form-select">
+                  <option value="Heritage Homestay">Heritage Homestay</option>
+                  <option value="Boutique Hotel">Boutique Hotel</option>
+                  <option value="Luxury Resort">Luxury Resort</option>
+                  <option value="Villa / Vacation Home">Villa / Vacation Home</option>
+                  <option value="Eco-Lodge / Camp">Eco-Lodge / Camp</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label for="owner-city">City / Destination <span class="req">*</span></label>
+                <input type="text" id="owner-city" placeholder="e.g. Udaipur, Rajasthan" class="form-input">
+              </div>
+              <div class="form-group flex-1">
+                <label for="owner-rooms">Total Room Count</label>
+                <input type="number" id="owner-rooms" placeholder="15" min="1" max="500" value="12" class="form-input">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="owner-gstin">Tourism License / GSTIN (Optional)</label>
+              <input type="text" id="owner-gstin" placeholder="e.g. 08AAAAA0000A1Z5" class="form-input">
+            </div>
+          </div>
+
+          <!-- ==========================================
+               ROLE-SPECIFIC FIELDS: WORKER
+               ========================================== -->
+          <div id="fields-worker" class="role-specific-section hidden">
+            <div class="form-section-title">Staff Assignment & Shift Preferences</div>
+
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label for="worker-dept">Primary Department <span class="req">*</span></label>
+                <select id="worker-dept" class="form-select">
+                  <option value="Housekeeping">Housekeeping</option>
+                  <option value="Maintenance">Maintenance & Repairs</option>
+                  <option value="Front Desk">Front Desk & Reception</option>
+                  <option value="Food & Beverage">Food & Beverage Service</option>
+                </select>
+              </div>
+              <div class="form-group flex-1">
+                <label for="worker-shift">Preferred Shift</label>
+                <select id="worker-shift" class="form-select">
+                  <option value="Morning (7 AM - 3 PM)">Morning (7 AM - 3 PM)</option>
+                  <option value="Afternoon (3 PM - 11 PM)">Afternoon (3 PM - 11 PM)</option>
+                  <option value="Night (11 PM - 7 AM)">Night (11 PM - 7 AM)</option>
+                  <option value="Flexible">Flexible / Rotational</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label for="worker-property">Assigned Property</label>
+                <input type="text" id="worker-property" placeholder="e.g. Amargarh Heritage Stay" value="Amargarh Heritage Stay" class="form-input">
+              </div>
+              <div class="form-group flex-1">
+                <label for="worker-empid">Employee / Staff ID</label>
+                <input type="text" id="worker-empid" placeholder="e.g. EMP-109" class="form-input">
+              </div>
+            </div>
+          </div>
+
+          <!-- ==========================================
+               ROLE-SPECIFIC FIELDS: CUSTOMER
+               ========================================== -->
+          <div id="fields-customer" class="role-specific-section hidden">
+            <div class="form-section-title">Travel & Stay Preferences (Booking Standard)</div>
+
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label for="customer-country">Country / Nationality <span class="req">*</span></label>
+                <input type="text" id="customer-country" placeholder="e.g. India" value="India" class="form-input">
+              </div>
+              <div class="form-group flex-1">
+                <label for="customer-style">Travel Style</label>
+                <select id="customer-style" class="form-select">
+                  <option value="Family">Family Holiday</option>
+                  <option value="Solo Traveler">Solo Traveler</option>
+                  <option value="Couple / Romantic">Couple / Romantic</option>
+                  <option value="Business / Remote Work">Business / Workation</option>
+                  <option value="Group / Friends">Group / Friends</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label for="customer-lang">Preferred Language</label>
+                <select id="customer-lang" class="form-select">
+                  <option value="English">English</option>
+                  <option value="Hindi">Hindi</option>
+                  <option value="Rajasthani">Rajasthani</option>
+                  <option value="French">French</option>
+                  <option value="German">German</option>
+                  <option value="Spanish">Spanish</option>
+                </select>
+              </div>
+              <div class="form-group flex-1">
+                <label for="customer-prefs">Dietary / Accessibility</label>
+                <input type="text" id="customer-prefs" placeholder="e.g. Vegetarian, Quiet room" class="form-input">
+              </div>
+            </div>
+          </div>
+
+          <div class="terms-wrap">
+            <label>
+              <input type="checkbox" id="terms-agree" required checked>
+              <span>I agree to the AtithiAI Hospitality <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</span>
+            </label>
+          </div>
+
+          <button type="submit" id="btn-submit-signup" class="submit-btn">
+            <span class="btn-text">Create Account & Enter Dashboard</span>
+            <svg class="btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+        </form>
+
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="auth-footer">
+      <p>© 2026 AtithiAI. Smarter Hospitality. Simpler Operations. Built for offline-first and online hospitality management.</p>
+    </footer>
+
+  </div>
+
+  <script src="auth.js"></script>
+</body>
+</html>

@@ -29,6 +29,7 @@ const I = {
   desk: p => <Icon {...p} path={<><path d="M3 20h18M4 20V9l8-5 8 5v11M9 20v-6h6v6"/></>} />,
   clipboard: p => <Icon {...p} path={<><rect x="6" y="4" width="12" height="17" rx="2"/><rect x="9" y="2" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h6"/></>} />,
   send: p => <Icon {...p} path={<path d="m3 20 18-8L3 4l0 6 12 2-12 2z"/>} />,
+  mic: p => <Icon {...p} path={<><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></>} />,
   sun: p => <Icon {...p} path={<><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.6M12 18.9v2.6M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M2.5 12h2.6M18.9 12h2.6M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></>} />,
   moon: p => <Icon {...p} path={<path d="M20.8 13.8A8.8 8.8 0 1 1 10.2 3.2a7 7 0 0 0 10.6 10.6Z"/>} />,
 };
@@ -88,7 +89,7 @@ const NAV = [
   { icon:"mappin", label:"Explore" },
   { icon:"wrench", label:"Requests" },
   { icon:"chat", label:"Messages" },
-  { icon:"sparkles", label:"Ask AtithiAI", id:"ask" },
+  { icon:"sparkles", label:"ATITHIAI Agent", id:"ask" },
   { icon:"bell", label:"Notifications" },
   { icon:"settings", label:"Profile" },
 ];
@@ -98,60 +99,110 @@ function Sidebar({ active, setActive, onAsk }) {
     <aside className="sidebar">
       <div className="brand">
         <div className="brand-name">AtithiAI</div>
-        <div className="brand-sub">Your stay, made simpler.</div>
+        <div className="brand-sub">GUEST PORTAL</div>
       </div>
-      <div className="nav-group">
-        {NAV.map((it, i) => {
-          const Icon = I[it.icon];
-          const isActive = it.id === active;
-          return (
-            <button key={i} className={`nav-item ${isActive ? 'active':''}`}
-              onClick={() => { if(it.id==='ask'){ onAsk(); } else if (it.id) { setActive(it.id); } }}>
-              <Icon size={16} />
-              <span>{it.label}</span>
-            </button>
-          );
-        })}
-      </div>
-      <div className="sidebar-foot">
-        <div className="row"><span className="label">Support</span><span className="value">24/7</span></div>
-      </div>
+      <div className="nav-group-label">Navigation</div>
+      {NAV.map(it => {
+        const Icon = I[it.icon] || I.home;
+        return (
+          <div
+            key={it.label}
+            className={`nav-item ${active===it.id?'active':''}`}
+            onClick={()=>{
+              if(it.id==='ask') onAsk();
+              else if(it.id) setActive(it.id);
+            }}
+          >
+            <Icon size={16}/>
+            <span>{it.label}</span>
+          </div>
+        );
+      })}
     </aside>
   );
 }
 
+/* ---------------- Session Helper ---------------- */
+const getActiveUser = () => {
+  try {
+    const raw = localStorage.getItem('atithi_user');
+    return raw ? JSON.parse(raw) : null;
+  } catch(e) { return null; }
+};
+
 /* ---------------- Header ---------------- */
-function Header({ onAsk, onSearch, onBell, theme, onToggleTheme }) {
+function Header({ onAsk, onSearch, onBell }) {
+  const activeUser = getActiveUser();
+  const guestName = activeUser ? activeUser.name : DATA.guest.name;
+  const initial = guestName ? guestName.charAt(0).toUpperCase() : 'D';
+
+  const handleLogout = () => {
+    localStorage.removeItem('atithi_token');
+    localStorage.removeItem('atithi_user');
+    window.location.href = 'auth.html?role=customer';
+  };
+
   return (
     <div className="header">
       <button className="search-bar" onClick={onSearch}>
         <I.search size={15} style={{color:'var(--text-40)'}}/>
         <span>Search your stay, services or places...</span>
       </button>
-      <div className="header-right">
-        <button className="ask-ai-btn" onClick={onAsk}><I.sparkles size={14}/> Ask AtithiAI</button>
-        <button
-          className="theme-toggle"
-          onClick={onToggleTheme}
-          title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-          aria-label="Toggle appearance theme"
-        >
-          {theme === 'dark' ? <I.sun size={16}/> : <I.moon size={16}/>}
-        </button>
+      <div className="header-right" style={{display:'flex', alignItems:'center', gap:'0.75rem'}}>
+        <a href="booking.html" style={{
+          textDecoration: 'none',
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '0.35rem',
+          padding: '0.42rem 0.85rem',
+          borderRadius: '999px',
+          background: 'rgba(0, 177, 197, 0.15)',
+          border: '1px solid rgba(0, 177, 197, 0.45)',
+          color: '#00e5ff',
+          fontSize: '0.8rem',
+          fontWeight: 600,
+          cursor: 'pointer'
+        }}>
+          <span>🏨</span>
+          <span>Book Stays</span>
+        </a>
+        <button className="ask-ai-btn" onClick={onAsk}><I.sparkles size={14}/> ATITHIAI Agent</button>
         <button className="icon-btn" onClick={onBell}><I.bell size={16}/><span className="dot-badge"></span></button>
-        <button className="profile-btn">
-          <div className="avatar">D</div>
+        <button className="profile-btn" title="Logged in as Guest">
+          <div className="avatar">{initial}</div>
           <div className="profile-meta">
-            <div className="name">{DATA.guest.name}</div>
-            <div className="role">Guest</div>
+            <div className="name">{guestName}</div>
+            <div className="role">Guest Stay</div>
           </div>
+        </button>
+        <button
+          className="logout-nav-btn"
+          title="Sign Out to Portal"
+          onClick={handleLogout}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.35rem',
+            padding: '0.45rem 0.85rem',
+            background: 'rgba(238, 100, 129, 0.12)',
+            border: '1px solid rgba(238, 100, 129, 0.3)',
+            borderRadius: '999px',
+            color: '#EE6481',
+            fontSize: '0.8rem',
+            fontWeight: 600,
+            cursor: 'pointer',
+            transition: 'all 0.2s'
+          }}
+        >
+          <I.x size={13} />
+          <span>Sign Out</span>
         </button>
       </div>
     </div>
   );
 }
 
-/* ---------------- AI Concierge Modal ---------------- */
+/* ---------------- AI Concierge Modal (ATITHIAI Agent) ---------------- */
 function AskAtithiAI({ onClose }) {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
@@ -159,17 +210,60 @@ function AskAtithiAI({ onClose }) {
   useEffect(()=>{ if(bodyRef.current) bodyRef.current.scrollTop = bodyRef.current.scrollHeight; }, [messages]);
   const ask = (q) => {
     if(!q.trim()) return;
-    const answer = AI_ANSWERS[q] || "I've made a note of that. Is there anything else I can take care of during your stay?";
-    setMessages(m => [...m, {role:"user", text:q}, {role:"ai", text:answer}]);
+    let answer = "";
+    let tools = [];
+    if (window.AtithiAiAgent) {
+      const res = window.AtithiAiAgent.process(q, 'customer');
+      answer = res.responseText;
+      tools = res.executedTools || [];
+    } else {
+      answer = AI_ANSWERS[q] || "I've made a note of that. Is there anything else I can take care of during your stay?";
+    }
+    setMessages(m => [...m, {role:"user", text:q}, {role:"ai", text:answer, tools}]);
     setInput("");
   };
+  const [listening, setListening] = useState(false);
+  const handleVoice = () => {
+    const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRec) {
+      setListening(true);
+      setTimeout(() => {
+        setInput("Request fresh towel set and extra pillows for Room 204");
+        setListening(false);
+      }, 700);
+      return;
+    }
+    try {
+      const rec = new SpeechRec();
+      rec.continuous = false;
+      rec.interimResults = true;
+      rec.lang = 'en-IN';
+      rec.onstart = () => setListening(true);
+      rec.onresult = e => {
+        let text = '';
+        for (let i = e.resultIndex; i < e.results.length; i++) text += e.results[i][0].transcript;
+        if (text) setInput(text);
+      };
+      rec.onerror = () => setListening(false);
+      rec.onend = () => setListening(false);
+      rec.start();
+    } catch(err) {
+      setListening(false);
+    }
+  };
+
   return (
     <div className="overlay-bg" onClick={onClose}>
-      <div className="ai-modal" onClick={e=>e.stopPropagation()}>
+      <div className="ai-modal" onClick={e=>e.stopPropagation()} style={{maxWidth:640}}>
         <div className="ai-modal-head">
-          <div>
-            <div className="ai-modal-title">✦ AtithiAI Concierge</div>
-            <div className="ai-modal-sub">What can I take care of for you?</div>
+          <div style={{display:'flex', alignItems:'center', gap:10}}>
+            <div style={{width:34, height:34, borderRadius:10, background:'linear-gradient(233deg, #00B1C5 1%, #EE6481 94%)', display:'flex', alignItems:'center', justifyContent:'center'}}>
+              <I.sparkles size={18} color="#fff"/>
+            </div>
+            <div>
+              <div className="ai-modal-title">ATITHIAI Agent <span style={{fontSize:11, background:'rgba(0,177,197,0.15)', color:'#00e0fa', padding:'2px 7px', borderRadius:10, border:'1px solid rgba(0,177,197,0.3)', marginLeft:6}}>Claude Sonnet 5</span></div>
+              <div className="ai-modal-sub">Operations & Travel Intelligence · 18 Tools Active</div>
+            </div>
           </div>
           <button className="icon-btn" onClick={onClose}><I.x size={15}/></button>
         </div>
@@ -177,18 +271,28 @@ function AskAtithiAI({ onClose }) {
           {messages.length === 0 && (
             <div className="ai-suggest">
               {DATA.suggestions.map((q,i)=>(
-                <button key={i} onClick={()=>ask(q)}>{q}</button>
+                <button key={i} onClick={()=>ask(q)}>✦ {q}</button>
               ))}
             </div>
           )}
           {messages.map((m,i)=>(
-            <div key={i} className={`chat-bubble ${m.role}`}>{m.text}</div>
+            <div key={i} className={`chat-bubble ${m.role}`}>
+              {m.tools && m.tools.length > 0 && (
+                <div style={{marginBottom:6, padding:'4px 8px', background:'rgba(0,0,0,0.3)', borderRadius:6, fontSize:11, color:'#00e0fa'}}>
+                  ⚡ <strong>Tools Executed:</strong> {m.tools.map(t=>t.name).join(', ')}
+                </div>
+              )}
+              {m.text}
+            </div>
           ))}
         </div>
         <div className="ai-modal-input">
-          <input placeholder="Ask AtithiAI anything..." value={input}
+          <input placeholder={listening ? "Listening... speak now" : "Ask ATITHIAI Agent anything..."} value={input}
             onChange={e=>setInput(e.target.value)}
             onKeyDown={e=>{ if(e.key==='Enter'){ ask(input); } }} />
+          <button type="button" className={`icon-btn ${listening ? 'listening-mic' : ''}`} title="Tap to speak (Voice typing)" onClick={handleVoice}>
+            <I.mic size={15} color={listening ? '#ef4444' : 'currentColor'} />
+          </button>
           <button className="icon-btn" onClick={()=>ask(input)}><I.send size={15}/></button>
         </div>
       </div>
@@ -211,7 +315,7 @@ function Hero({ onAsk }) {
         </div>
         <div className="hero-actions">
           <button className="btn primary">Explore Your Stay →</button>
-          <button className="btn" onClick={onAsk}>Ask AtithiAI</button>
+          <button className="btn" onClick={onAsk}>ATITHIAI Agent</button>
         </div>
       </div>
     </div>
@@ -380,18 +484,48 @@ function ExploreCard() {
 }
 
 function BookingCard() {
-  const b = DATA.booking;
+  let b = DATA.booking;
+  let propName = DATA.property.name;
+  let roomDetails = `Room ${DATA.stay.room} · ${DATA.stay.dates}`;
+  let isDirect = false;
+
+  try {
+    const raw = localStorage.getItem('atithiai_latest_booking');
+    if (raw) {
+      const saved = JSON.parse(raw);
+      if (saved && (saved.booking_ref || saved.id)) {
+        b = {
+          id: saved.booking_ref || saved.id,
+          total: Number(saved.total_amount) || 7200,
+          status: saved.booking_status ? saved.booking_status.toUpperCase() : "CONFIRMED"
+        };
+        propName = saved.property_name || propName;
+        roomDetails = `${saved.room_type || 'Heritage Room'} · Direct Host Stay`;
+        isDirect = true;
+      }
+    }
+  } catch(e) {}
+
   return (
     <Card>
       <div className="card-head">
         <span className="card-title">Your Bookings</span>
         <span className="badge confirmed">{b.status}</span>
       </div>
-      <div className="serif" style={{fontSize:18}}>{DATA.property.name}</div>
-      <div style={{color:'var(--text-60)', fontSize:13, marginTop:2}}>Room {DATA.stay.room} · {DATA.stay.dates}</div>
-      <div className="row"><span className="label">Booking ID</span><span className="value">{b.id}</span></div>
-      <div className="row"><span className="label">Total</span><span className="value">₹{b.total.toLocaleString()}</span></div>
-      <button className="btn" style={{width:'100%', marginTop:14}}>View Booking →</button>
+      <div className="serif" style={{fontSize:18}}>{propName}</div>
+      <div style={{color:'var(--text-60)', fontSize:13, marginTop:2}}>{roomDetails}</div>
+      {isDirect && (
+        <div style={{margin:'6px 0', display:'inline-block', padding:'2px 8px', borderRadius:4, background:'rgba(16,185,129,0.15)', color:'#10B981', fontSize:11, fontWeight:600}}>
+          ✓ 0% Brokerage Direct Host Pass
+        </div>
+      )}
+      <div className="row"><span className="label">Booking Ref</span><span className="value">{b.id}</span></div>
+      <div className="row"><span className="label">Total Paid</span><span className="value">₹{b.total.toLocaleString()}</span></div>
+      <div style={{display:'flex', gap:8, marginTop:14}}>
+        <a href="booking.html" className="btn" style={{flex:1, textAlign:'center', textDecoration:'none', background:'linear-gradient(135deg, #0066FF, #00B1C5)', color:'#fff'}}>
+          🏨 Book New Homestay
+        </a>
+      </div>
     </Card>
   );
 }
@@ -451,13 +585,11 @@ function App() {
   const [active, setActive] = useState("dashboard");
   const [askOpen, setAskOpen] = useState(false);
   const [toast, setToast] = useState(null);
-  const [theme, setTheme] = useState("dark");
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => setTheme(t => (t === 'dark' ? 'light' : 'dark'));
+    // Lock to dark mode permanently
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }, []);
 
   useEffect(() => {
     if (!toast) return;
@@ -470,24 +602,32 @@ function App() {
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
+  const openAgent = () => {
+    if (window.AtithiAiAgent) {
+      window.AtithiAiAgent.open({ context: 'customer' });
+    } else {
+      setAskOpen(true);
+    }
+  };
+
   return (
     <div className="app">
-      <Sidebar active={active} setActive={setActive} onAsk={()=>setAskOpen(true)} />
+      <Sidebar active={active} setActive={setActive} onAsk={openAgent} />
 
       <div className="main">
-        <Header onAsk={()=>setAskOpen(true)} onSearch={()=>setToast("Search coming right up.")} onBell={()=>scrollTo('notifications-section')} theme={theme} onToggleTheme={toggleTheme} />
+        <Header onAsk={openAgent} onSearch={()=>setToast("Search coming right up.")} onBell={()=>scrollTo('notifications-section')} />
 
         <div className="content">
-          <Hero onAsk={()=>setAskOpen(true)} />
+          <Hero onAsk={openAgent} />
 
           <div className="grid grid-2 section-gap">
             <CurrentStayCard />
             <StayProgressCard />
           </div>
 
-          <AIConciergeCard onAsk={()=>setAskOpen(true)} />
+          <AIConciergeCard onAsk={openAgent} />
 
-          <QuickActions onAsk={()=>setAskOpen(true)} />
+          <QuickActions onAsk={openAgent} />
 
           <div className="grid grid-2 section-gap" id="room-section">
             <MyRoomCard />
@@ -517,7 +657,7 @@ function App() {
       <div className="bottom-nav">
         <div className={`bn-item ${active==='dashboard'?'active':''}`}><I.home size={17}/><span>Home</span></div>
         <div className="bn-item"><I.bed size={17}/><span>Stay</span></div>
-        <div className="bn-item ai" onClick={()=>setAskOpen(true)}><div className="ic-wrap"><I.sparkles size={16}/></div><span>AI</span></div>
+        <div className="bn-item ai" onClick={openAgent}><div className="ic-wrap"><I.sparkles size={16}/></div><span>AI</span></div>
         <div className="bn-item"><I.bell size={17}/><span>Alerts</span></div>
         <div className="bn-item"><I.settings size={17}/><span>More</span></div>
       </div>

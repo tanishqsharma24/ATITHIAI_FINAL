@@ -89,17 +89,7 @@ body {
 
 /* Fixed Ultra-HD Canvas Scrubbing Background */
 #animation-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  height: 100dvh; /* keeps the frame full-bleed on mobile as browser chrome shows/hides */
-  display: block;
-  z-index: 0;
-  pointer-events: none;
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: auto;
+  display: none !important;
 }
 
 /* Background Ambient Lighting */

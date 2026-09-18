@@ -12,10 +12,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="worker_Dashboard_2.css">
+  <link rel="stylesheet" href="atithiai-n8n-agent.css">
 </head>
 <body>
-  <!-- Fixed Ultra Smooth Scroll Canvas Background (Scrubbing Engine) -->
-  <canvas id="animation-canvas"></canvas>
 
   <!-- Ambient Glow Lighting Layer -->
   <div class="ambient-glow-layer">
@@ -77,8 +76,14 @@
           </div>
 
           <!-- AI Copilot CTA Trigger (Section 14) -->
-          <button type="button" class="btn-ai-header open-ai-drawer-btn" title="Open Worker AI Copilot">
-            <span>✦ Ask AtithiAI</span>
+          <button type="button" class="btn-ai-header open-ai-drawer-btn" title="Open ATITHIAI Operations Agent">
+            <span>✦ ATITHIAI Agent</span>
+          </button>
+
+          <!-- Sign Out Button -->
+          <button type="button" id="btn-worker-logout" class="icon-btn" title="Sign Out to Portal" onclick="localStorage.removeItem('atithi_token'); localStorage.removeItem('atithi_user'); window.location.href='auth.html?role=worker';" style="display:inline-flex; align-items:center; gap:0.35rem; padding:0.45rem 0.85rem; background:rgba(238,100,129,0.12); border:1px solid rgba(238,100,129,0.3); border-radius:999px; color:#EE6481; font-size:0.8rem; font-weight:600; cursor:pointer; text-decoration:none;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path><line x1="12" y1="2" x2="12" y2="12"></line></svg>
+            <span>Sign Out</span>
           </button>
         </div>
       </div>
@@ -181,7 +186,7 @@
 
         <div class="ai-priority-right">
           <button type="button" id="btn-ask-ai-priority" class="btn-ask-ai">
-            <span>Ask AtithiAI</span>
+            <span>ATITHIAI Agent</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </button>
           <button type="button" class="btn-quick-execute" onclick="document.getElementById('section-todays-work').scrollIntoView({behavior:'smooth'})">
@@ -931,6 +936,7 @@
 
   </div>
 
+  <script src="atithiai-n8n-agent.js"></script>
   <script src="worker_Dashboard_2.js"></script>
 </body>
 </html>

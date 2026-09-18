@@ -39,9 +39,7 @@ a{color:inherit; text-decoration:none;}
 /* ---------- background: scroll-scrubbing frame canvas ---------- */
 .bg-fallback{position:fixed; inset:0; z-index:-1; background:#000;}
 #animation-canvas{
-  position:fixed; top:0; left:0; width:100vw; height:100vh;
-  display:block; z-index:0; pointer-events:none;
-  image-rendering:-webkit-optimize-contrast; image-rendering:auto;
+  display: none !important;
 }
 .bg-canvas-overlay{
   position:fixed; inset:0; z-index:0; pointer-events:none;

@@ -35,6 +35,7 @@ const I = {
   arrowUp: p => <Icon {...p} path={<path d="M12 19V5M5 12l7-7 7 7"/>} />,
   arrowDown: p => <Icon {...p} path={<path d="M12 5v14M19 12l-7 7-7-7"/>} />,
   sun: p => <Icon {...p} path={<><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2 12h2M20 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></>} />,
+  mic: p => <Icon {...p} path={<><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></>} />,
   moon: p => <Icon {...p} path={<path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/>} />,
 };
 
@@ -140,7 +141,7 @@ const roomLabel = s => ({ready:"Ready", cleaning:"Cleaning", maintenance:"Mainte
 const NAV = [
   { section:null, items:[ {icon:"home", label:"Dashboard", id:"dashboard"} ] },
   { section:"Operations", items:[ {icon:"bolt", label:"Today"}, {icon:"bolt", label:"Tasks"}, {icon:"bolt", label:"Activity"} ] },
-  { section:"Bookings", items:[ {icon:"calendar", label:"Calendar"}, {icon:"calendar", label:"Reservations"}, {icon:"calendar", label:"Availability"} ] },
+  { section:"Bookings", items:[ {icon:"calendar", label:"Calendar"}, {icon:"calendar", label:"Reservations"}, {icon:"calendar", label:"Availability"}, {icon:"calendar", label:"Public Booking Portal", id:"booking_portal"} ] },
   { section:"Rooms", items:[ {icon:"bed", label:"Room Status"}, {icon:"bed", label:"Room Details"} ] },
   { section:"Guests", items:[ {icon:"users", label:"All Guests"}, {icon:"users", label:"Check-ins"}, {icon:"users", label:"Check-outs"}, {icon:"users", label:"Foreign Guests"} ] },
   { section:null, items:[ {icon:"brush", label:"Housekeeping"} ] },
@@ -148,7 +149,7 @@ const NAV = [
   { section:"Compliance", items:[ {icon:"clipboard", label:"Overview"}, {icon:"clipboard", label:"Requirements"}, {icon:"clipboard", label:"Calendar"}, {icon:"clipboard", label:"Inspections"} ] },
   { section:null, items:[ {icon:"folder", label:"Documents"}, {icon:"card", label:"Payments"} ] },
   { section:"Service Quality", items:[ {icon:"star", label:"Reviews"}, {icon:"star", label:"Complaints"}, {icon:"star", label:"AI Insights"} ] },
-  { section:null, items:[ {icon:"bar", label:"Analytics"}, {icon:"users", label:"Staff"}, {icon:"bell", label:"Notifications"}, {icon:"sparkles", label:"Ask AtithiAI", id:"ask"}, {icon:"settings", label:"Settings"} ] },
+  { section:null, items:[ {icon:"bar", label:"Analytics"}, {icon:"users", label:"Staff"}, {icon:"bell", label:"Notifications"}, {icon:"sparkles", label:"ATITHIAI Agent", id:"ask"}, {icon:"settings", label:"Settings"} ] },
 ];
 
 function Sidebar({ open, onClose, active, setActive, onAsk }) {
@@ -169,7 +170,11 @@ function Sidebar({ open, onClose, active, setActive, onAsk }) {
               return (
                 <div key={ii}
                   className={`nav-item ${isActive ? 'active':''}`}
-                  onClick={() => { if(it.id==='ask'){ onAsk(); } else if (it.id) { setActive(it.id); onClose(); } }}>
+                  onClick={() => {
+                    if (it.id === 'booking_portal') { window.location.href = 'booking.html'; return; }
+                    if (it.id === 'ask') { onAsk(); }
+                    else if (it.id) { setActive(it.id); onClose(); }
+                  }}>
                   <Icon size={16} />
                   <span>{it.label}</span>
                 </div>
@@ -242,17 +247,60 @@ function AskAtithiAI({ onClose }) {
   useEffect(()=>{ if(bodyRef.current) bodyRef.current.scrollTop = bodyRef.current.scrollHeight; }, [messages]);
   const ask = (q) => {
     if(!q.trim()) return;
-    const answer = AI_ANSWERS[q] || "Here's a quick take based on today's operations data — arrivals, compliance and maintenance all look on track, with the items already flagged in your Daily Briefing needing the closest attention.";
-    setMessages(m => [...m, {role:"user", text:q}, {role:"ai", text:answer}]);
+    let answer = "";
+    let tools = [];
+    if (window.AtithiAiAgent) {
+      const res = window.AtithiAiAgent.process(q, 'owner');
+      answer = res.responseText;
+      tools = res.executedTools || [];
+    } else {
+      answer = AI_ANSWERS[q] || "Here's a quick take based on today's operations data — arrivals, compliance and maintenance all look on track, with the items already flagged in your Daily Briefing needing the closest attention.";
+    }
+    setMessages(m => [...m, {role:"user", text:q}, {role:"ai", text:answer, tools}]);
     setInput("");
   };
+  const [listening, setListening] = useState(false);
+  const handleVoice = () => {
+    const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRec) {
+      setListening(true);
+      setTimeout(() => {
+        setInput("Check inventory stock and alert on low threshold items");
+        setListening(false);
+      }, 700);
+      return;
+    }
+    try {
+      const rec = new SpeechRec();
+      rec.continuous = false;
+      rec.interimResults = true;
+      rec.lang = 'en-IN';
+      rec.onstart = () => setListening(true);
+      rec.onresult = e => {
+        let text = '';
+        for (let i = e.resultIndex; i < e.results.length; i++) text += e.results[i][0].transcript;
+        if (text) setInput(text);
+      };
+      rec.onerror = () => setListening(false);
+      rec.onend = () => setListening(false);
+      rec.start();
+    } catch(err) {
+      setListening(false);
+    }
+  };
+
   return (
     <div className="overlay-bg" onClick={onClose}>
-      <div className="ai-modal" onClick={e=>e.stopPropagation()}>
+      <div className="ai-modal" onClick={e=>e.stopPropagation()} style={{maxWidth:660}}>
         <div className="ai-modal-head">
-          <div>
-            <div className="ai-modal-title">✨ Ask AtithiAI</div>
-            <div className="ai-modal-sub">What would you like to know?</div>
+          <div style={{display:'flex', alignItems:'center', gap:10}}>
+            <div style={{width:34, height:34, borderRadius:10, background:'linear-gradient(233deg, #00B1C5 1%, #EE6481 94%)', display:'flex', alignItems:'center', justifyContent:'center'}}>
+              <I.sparkles size={18} color="#fff"/>
+            </div>
+            <div>
+              <div className="ai-modal-title">ATITHIAI Agent <span style={{fontSize:11, background:'rgba(0,177,197,0.15)', color:'#00e0fa', padding:'2px 7px', borderRadius:10, border:'1px solid rgba(0,177,197,0.3)', marginLeft:6}}>Claude Sonnet 5</span></div>
+              <div className="ai-modal-sub">Operations & Travel Intelligence · 18 Data Table Tools & Slack Active</div>
+            </div>
           </div>
           <button className="drawer-close" style={{position:'static'}} onClick={onClose}><I.x size={15}/></button>
         </div>
@@ -262,15 +310,27 @@ function AskAtithiAI({ onClose }) {
               {Object.keys(AI_ANSWERS).map((q,i)=>(
                 <button key={i} onClick={()=>ask(q)}>→ {q}</button>
               ))}
+              <button onClick={()=>ask("Check inventory status and threshold alerts")}>→ Check inventory status and threshold alerts</button>
+              <button onClick={()=>ask("Show active tasks and overdue SLA matrix")}>→ Show active tasks and overdue SLA matrix</button>
             </div>
           )}
           {messages.map((m,i)=>(
-            <div key={i} className={`chat-bubble ${m.role}`}>{m.text}</div>
+            <div key={i} className={`chat-bubble ${m.role}`}>
+              {m.tools && m.tools.length > 0 && (
+                <div style={{marginBottom:6, padding:'4px 8px', background:'rgba(0,0,0,0.3)', borderRadius:6, fontSize:11, color:'#00e0fa'}}>
+                  ⚡ <strong>Tools Executed:</strong> {m.tools.map(t=>t.name).join(', ')}
+                </div>
+              )}
+              {m.text}
+            </div>
           ))}
         </div>
         <div className="ai-modal-input">
-          <input placeholder="Ask anything..." value={input} onChange={e=>setInput(e.target.value)}
+          <input placeholder={listening ? "Listening... speak now" : "Ask operations query, inspect tasks, or check inventory..."} value={input} onChange={e=>setInput(e.target.value)}
             onKeyDown={e=>{ if(e.key==='Enter') ask(input); }} />
+          <button type="button" className={`icon-btn ${listening ? 'listening-mic' : ''}`} title="Tap to speak (Voice typing)" onClick={handleVoice} style={{background:'rgba(255,255,255,0.06)', borderRadius:8, width:34, height:34, display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer', border:'1px solid rgba(255,255,255,0.1)'}}>
+            <I.mic size={15} color={listening ? '#ef4444' : 'currentColor'} />
+          </button>
           <button className="btn primary" onClick={()=>ask(input)}>Send</button>
         </div>
       </div>
@@ -278,8 +338,23 @@ function AskAtithiAI({ onClose }) {
   );
 }
 
-function Header({ onMenu, onSearch, onAsk, onBell, isOnline, theme, onToggleTheme }) {
+function Header({ onMenu, onSearch, onAsk, onBell, isOnline }) {
   const [profileOpen, setProfileOpen] = useState(false);
+  const activeUser = (() => {
+    try {
+      const raw = localStorage.getItem('atithi_user');
+      return raw ? JSON.parse(raw) : null;
+    } catch(e) { return null; }
+  })();
+  const ownerName = activeUser ? activeUser.name : "Vikram Rathore";
+  const initial = ownerName ? ownerName.charAt(0).toUpperCase() : "V";
+
+  const handleLogout = () => {
+    localStorage.removeItem('atithi_token');
+    localStorage.removeItem('atithi_user');
+    window.location.href = 'auth.html?role=owner';
+  };
+
   return (
     <header className="header">
       <button className="icon-btn mobile-nav-btn" onClick={onMenu}><I.menu size={17}/></button>
@@ -289,36 +364,72 @@ function Header({ onMenu, onSearch, onAsk, onBell, isOnline, theme, onToggleThem
         <span className="search-kbd">⌘K</span>
       </div>
       <div className="header-right">
-        <button
-          className="theme-toggle"
-          onClick={onToggleTheme}
-          aria-label="Toggle bright / dark theme"
-          title={theme === 'light' ? 'Switch to dark theme' : 'Switch to bright theme'}
-        >
-          <span className="knob">{theme === 'light' ? <I.sun size={12}/> : <I.moon size={12}/>}</span>
-        </button>
+        <a href="booking.html" style={{
+          textDecoration: 'none',
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '0.35rem',
+          padding: '0.42rem 0.85rem',
+          borderRadius: '999px',
+          background: 'rgba(0, 177, 197, 0.15)',
+          border: '1px solid rgba(0, 177, 197, 0.45)',
+          color: '#00e5ff',
+          fontSize: '0.8rem',
+          fontWeight: 600,
+          cursor: 'pointer'
+        }}>
+          <span>🏨</span>
+          <span>Booking Portal</span>
+        </a>
         <div className="status-chip">
           <span className="status-dot" style={{background: isOnline? '#10B981':'#F59E0B'}}></span>
           {isOnline ? 'Online' : 'Offline'}
         </div>
-        <button className="ask-ai-btn" onClick={onAsk}><I.sparkles size={15}/> Ask AtithiAI</button>
+        <button className="ask-ai-btn" onClick={onAsk}><I.sparkles size={15}/> ATITHIAI Agent</button>
         <button className="icon-btn" onClick={onBell}><I.bell size={16}/><span className="dot-badge"></span></button>
         <div style={{position:'relative'}}>
-          <button className="profile-btn" onClick={()=>setProfileOpen(o=>!o)}>
-            <div className="avatar">D</div>
+          <button className="profile-btn" onClick={()=>setProfileOpen(o=>!o)} title="Account Details">
+            <div className="avatar">{initial}</div>
             <div className="profile-meta">
-              <div className="name">Dev</div>
+              <div className="name">{ownerName}</div>
               <div className="role">Property Owner</div>
             </div>
           </button>
           {profileOpen && (
-            <div className="card" style={{position:'absolute', right:0, top:'110%', width:190, padding:8, zIndex:30}}>
-              {["My Profile","Property Settings","Notifications","Security","Logout"].map((it,i)=>(
-                <div key={i} className="nav-item" style={{fontSize:13}}>{it}</div>
-              ))}
+            <div className="card" style={{position:'absolute', right:0, top:'110%', width:200, padding:8, zIndex:30, boxShadow:'0 10px 30px rgba(0,0,0,0.5)'}}>
+              <div style={{padding:'8px 12px', fontSize:12, color:'var(--text-40)', borderBottom:'1px solid var(--border)'}}>
+                Signed in as <strong>{ownerName}</strong>
+              </div>
+              <div className="nav-item" style={{fontSize:13, marginTop:4}} onClick={()=>setProfileOpen(false)}>My Profile</div>
+              <div className="nav-item" style={{fontSize:13}} onClick={()=>setProfileOpen(false)}>Property Settings</div>
+              <div className="nav-item" style={{fontSize:13, color:'#EE6481', fontWeight:600}} onClick={handleLogout}>
+                <I.x size={14} style={{marginRight:6}} /> Sign Out
+              </div>
             </div>
           )}
         </div>
+        <button
+          className="logout-nav-btn"
+          title="Sign Out"
+          onClick={handleLogout}
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.35rem',
+            padding: '0.45rem 0.85rem',
+            background: 'rgba(238, 100, 129, 0.12)',
+            border: '1px solid rgba(238, 100, 129, 0.3)',
+            borderRadius: '999px',
+            color: '#EE6481',
+            fontSize: '0.8rem',
+            fontWeight: 600,
+            cursor: 'pointer',
+            transition: 'all 0.2s'
+          }}
+        >
+          <I.x size={13} />
+          <span>Sign Out</span>
+        </button>
       </div>
     </header>
   );
@@ -338,7 +449,7 @@ function AIBriefing({ onAsk }) {
       </div>
       <div className="ai-actions">
         <button className="btn primary">View All Priorities</button>
-        <button className="btn" onClick={onAsk}>Ask AtithiAI</button>
+        <button className="btn" onClick={onAsk}>ATITHIAI Agent</button>
       </div>
     </Card>
   );
@@ -684,7 +795,6 @@ function SyncCenterModal({ onClose }) {
 /* ---------------- App ---------------- */
 function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [theme, setTheme] = useState("dark");
   const [active, setActive] = useState("dashboard");
   const [searchOpen, setSearchOpen] = useState(false);
   const [askOpen, setAskOpen] = useState(false);
@@ -694,6 +804,11 @@ function App() {
   const [toast, setToast] = useState(null);
   const [tickets, setTickets] = useState(DATA.maintenance.tickets);
   const [arrivals, setArrivals] = useState(DATA.arrivals);
+
+  useEffect(() => {
+    // Lock to dark mode permanently
+    document.documentElement.setAttribute('data-theme', 'dark');
+  }, []);
 
   useEffect(() => {
     const handler = (e) => {
@@ -712,12 +827,6 @@ function App() {
     return () => clearTimeout(t);
   }, [toast]);
 
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  const toggleTheme = () => setTheme(t => t === 'dark' ? 'light' : 'dark');
-
   const scrollTo = (id) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -727,14 +836,21 @@ function App() {
     scrollTo(map[id]);
   };
 
+  const openAgent = () => {
+    if (window.AtithiAiAgent) {
+      window.AtithiAiAgent.open({ context: 'owner' });
+    } else {
+      setAskOpen(true);
+    }
+  };
+
   return (
     <div className="app">
-      <Sidebar open={sidebarOpen} onClose={()=>setSidebarOpen(false)} active={active} setActive={setActive} onAsk={()=>setAskOpen(true)} />
+      <Sidebar open={sidebarOpen} onClose={()=>setSidebarOpen(false)} active={active} setActive={setActive} onAsk={openAgent} />
 
       <div className="main">
-        <Header onMenu={()=>setSidebarOpen(true)} onSearch={()=>setSearchOpen(true)} onAsk={()=>setAskOpen(true)}
-          onBell={()=>scrollTo('notifications-section')} isOnline={syncMode!=='offline'}
-          theme={theme} onToggleTheme={toggleTheme} />
+        <Header onMenu={()=>setSidebarOpen(true)} onSearch={()=>setSearchOpen(true)} onAsk={openAgent}
+          onBell={()=>scrollTo('notifications-section')} isOnline={syncMode!=='offline'} />
 
         <div className="content">
           <div className="welcome">
@@ -754,7 +870,7 @@ function App() {
             {DATA.kpis.map((k,i)=>(<KPICard key={k.id} k={k} idx={i} onOpen={handleKpiOpen} />))}
           </div>
 
-          <AIBriefing onAsk={()=>setAskOpen(true)} />
+          <AIBriefing onAsk={openAgent} />
 
           <div className="grid grid-2 section-gap">
             <OperationsCard />
