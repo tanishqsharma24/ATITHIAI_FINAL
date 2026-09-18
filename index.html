@@ -1,12 +1,2974 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-black text-white">
+
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0; url=Atithiai_Landing.Page1.html">
-  <title>AtithiAI</title>
-  <script>window.location.replace('Atithiai_Landing.Page1.html');</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AtithiAI — Smarter Hospitality. Simpler Operations.</title>
+  <meta name="description"
+    content="AtithiAI is an AI-powered, offline-first operating platform built for small hotels, homestays and rural hospitality businesses.">
+  <meta property="og:title" content="AtithiAI — Smarter Hospitality. Simpler Operations.">
+  <meta property="og:description"
+    content="AtithiAI is an AI-powered, offline-first operating platform built for small hotels, homestays and rural hospitality businesses.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="atithiai-n8n-agent.css">
+  <style>
+    /* ========================================================
+   ATITHIAI - Modern Glassmorphic Scroll Theme
+   Design System Tokens & Micro-Interactions
+   ======================================================== */
+
+    :root {
+      --font-sans: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-display: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+      --color-brand-blue: #0066FF;
+      --color-brand-emerald: #10B981;
+      --color-brand-amber: #F59E0B;
+      --bg-glass-card: rgba(255, 255, 255, 0.07);
+      --bg-glass-card-hover: rgba(255, 255, 255, 0.13);
+      --border-glass: rgba(255, 255, 255, 0.2);
+      --border-glass-subtle: rgba(255, 255, 255, 0.12);
+      --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      background-color: #000000;
+      color: #ffffff;
+      font-family: var(--font-sans);
+      overflow-x: hidden;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.25) transparent;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Custom Minimal Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 9999px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.45);
+    }
+
+    ::selection {
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    /* Typography Utilities */
+    .font-display-italic {
+      font-family: var(--font-display);
+      font-style: italic;
+    }
+
+    .text-blue {
+      color: var(--color-brand-blue);
+    }
+
+    .text-emerald {
+      color: var(--color-brand-emerald);
+    }
+
+    .text-amber {
+      color: var(--color-brand-amber);
+    }
+
+    /* Background Ambient Lighting Layer */
+    .ambient-glow-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .ambient-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.22;
+      transition: all 1s ease;
+    }
+
+    .ambient-orb-1 {
+      top: -10%;
+      left: 20%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, var(--color-brand-blue) 0%, transparent 70%);
+    }
+
+    .ambient-orb-2 {
+      top: 40%;
+      right: -5%;
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, var(--color-brand-emerald) 0%, transparent 70%);
+      opacity: 0.14;
+    }
+
+    .ambient-orb-3 {
+      bottom: 10%;
+      left: 10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, var(--color-brand-amber) 0%, transparent 70%);
+      opacity: 0.12;
+    }
+
+    /* ========================================================
+   Header & Sticky Navigation
+   ======================================================== */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 40;
+      padding: 1.25rem 1.5rem;
+      transition: background-color 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease;
+      pointer-events: auto;
+    }
+
+    .site-header.scrolled {
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 0.85rem 1.5rem;
+    }
+
+    .header-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .brand-logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      color: #ffffff;
+      text-decoration: none;
+      text-transform: uppercase;
+      user-select: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .brand-logo:hover {
+      opacity: 0.85;
+    }
+
+    /* Desktop Navigation Centered Pill Container */
+    .desktop-nav {
+      display: none;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--border-glass);
+      border-radius: 9999px;
+      padding: 0.35rem 0.45rem;
+      box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.04);
+      white-space: nowrap;
+    }
+
+    @media (min-width: 768px) {
+      .desktop-nav {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+    }
+
+    .nav-pill {
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.8);
+      padding: 0.45rem 1.1rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: var(--font-sans);
+    }
+
+    .nav-pill:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .nav-pill.active {
+      background: #ffffff;
+      color: #000000;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    .dashboard-nav-menu {
+      position: relative;
+    }
+
+    .dashboard-nav-menu summary {
+      list-style: none;
+    }
+
+    .dashboard-nav-menu summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .dashboard-nav-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.8);
+      padding: 0.45rem 1.1rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: var(--font-sans);
+    }
+
+    .dashboard-nav-trigger:hover,
+    .dashboard-nav-menu[open] .dashboard-nav-trigger {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .dashboard-nav-trigger svg {
+      width: 0.9rem;
+      height: 0.9rem;
+      transition: transform 0.2s ease;
+    }
+
+    .dashboard-nav-menu[open] .dashboard-nav-trigger svg {
+      transform: rotate(180deg);
+    }
+
+    .dashboard-nav-popover {
+      position: absolute;
+      top: calc(100% + 0.7rem);
+      left: 50%;
+      min-width: 180px;
+      padding: 0.4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      background: #111111;
+      border: 1px solid var(--border-glass);
+      border-radius: 0.85rem;
+      box-shadow: var(--shadow-glass);
+      transform: translateX(-50%);
+    }
+
+    .dashboard-nav-link {
+      padding: 0.65rem 0.75rem;
+      border-radius: 0.55rem;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .dashboard-nav-link:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .open-menu-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-glass);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-radius: 9999px;
+      padding: 0.5rem 1.25rem;
+      color: #ffffff;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.04);
+      transition: all 0.2s ease;
+      font-family: var(--font-sans);
+    }
+
+    .open-menu-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.35);
+    }
+
+    .open-menu-btn:active {
+      background: rgba(255, 255, 255, 0.22);
+      transform: scale(0.98);
+    }
+
+    .icon-menu {
+      width: 1.1rem;
+      height: 1.1rem;
+    }
+
+    @media (min-width: 768px) {
+      .icon-menu {
+        display: none;
+      }
+    }
+
+    /* ========================================================
+   Main Scrollable Content Layout
+   ======================================================== */
+    .main-content {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      pointer-events: auto;
+    }
+
+    /* ========================================================
+   Section 1: Hero Banner Fold
+   ======================================================== */
+    .hero-section {
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 6.5rem 1.5rem 2rem 1.5rem;
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    @media (min-width: 1024px) {
+      .hero-section {
+        height: 100vh;
+        padding: 6rem 3rem 2.5rem 3rem;
+      }
+    }
+
+    .hero-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1;
+    }
+
+    .hero-center-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      max-width: 900px;
+      margin: auto;
+      padding: 1rem 0;
+    }
+
+    /* HUD Bar Visual */
+    .hero-hud-bar {
+      margin-bottom: 1.75rem;
+      width: 100%;
+      max-width: 580px;
+    }
+
+    .hud-inner {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-glass);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-radius: 9999px;
+      padding: 0.45rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      box-shadow: 0 8px 32px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    .hud-node {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .hud-node-icon {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .hud-node-icon svg {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    .hud-node-text {
+      text-align: left;
+    }
+
+    @media (max-width: 480px) {
+      .hud-node-text {
+        display: none;
+      }
+    }
+
+    .hud-node-title {
+      display: block;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 1;
+    }
+
+    .hud-node-sub {
+      display: block;
+      font-size: 0.625rem;
+      color: rgba(255, 255, 255, 0.6);
+      font-family: monospace;
+      margin-top: 0.15rem;
+    }
+
+    .hud-connector {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    .hud-line {
+      width: 1.25rem;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2));
+    }
+
+    @media (min-width: 640px) {
+      .hud-line {
+        width: 2.25rem;
+      }
+    }
+
+    .hud-pulse-dot {
+      width: 0.75rem;
+      height: 0.75rem;
+      animation: pulseDot 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseDot {
+
+      0%,
+      100% {
+        opacity: 0.4;
+        transform: scale(0.9);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.15);
+      }
+    }
+
+    /* Hero Typography */
+    .hero-title {
+      font-size: 2.25rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      color: #ffffff;
+      line-height: 1.15;
+      user-select: none;
+      text-wrap: balance;
+    }
+
+    @media (min-width: 640px) {
+      .hero-title {
+        font-size: 3rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .hero-title {
+        font-size: 3.75rem;
+      }
+    }
+
+    .hero-subtitle {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.85);
+      font-weight: 400;
+      max-width: 650px;
+      margin: 1rem auto 0 auto;
+      line-height: 1.6;
+      text-wrap: balance;
+    }
+
+    @media (min-width: 640px) {
+      .hero-subtitle {
+        font-size: 1.125rem;
+      }
+    }
+
+    /* Dual CTAs */
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.85rem;
+      margin-top: 1.75rem;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      background: linear-gradient(135deg, #0066FF 0%, #00B1C5 100%);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 0.925rem;
+      padding: 0.65rem 1.65rem;
+      border-radius: 9999px;
+      box-shadow: 0 4px 20px rgba(0, 102, 255, 0.4), 0 0 15px rgba(0, 177, 197, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      text-decoration: none;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.25s ease;
+      font-family: var(--font-sans);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #0070F3 0%, #00C4FF 100%);
+      box-shadow: 0 8px 30px rgba(0, 177, 197, 0.55), 0 0 20px rgba(0, 102, 255, 0.4);
+      transform: translateY(-2px);
+      color: #ffffff;
+    }
+
+    .btn-primary:active {
+      transform: scale(0.98);
+    }
+
+    .btn-icon {
+      width: 1rem;
+      height: 1rem;
+      stroke: #ffffff;
+      color: #ffffff;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-primary:hover .btn-icon {
+      transform: translateY(2px);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: linear-gradient(135deg, #0066FF 0%, #00B1C5 100%);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 0.925rem;
+      padding: 0.45rem 0.55rem 0.45rem 1.4rem;
+      border-radius: 9999px;
+      box-shadow: 0 4px 20px rgba(0, 102, 255, 0.4), 0 0 15px rgba(0, 177, 197, 0.25);
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.25s ease;
+      font-family: var(--font-sans);
+    }
+
+    .btn-secondary:hover {
+      background: linear-gradient(135deg, #0070F3 0%, #00C4FF 100%);
+      box-shadow: 0 8px 30px rgba(0, 177, 197, 0.55), 0 0 20px rgba(0, 102, 255, 0.4);
+      border-color: rgba(255, 255, 255, 0.35);
+      transform: translateY(-2px);
+      color: #ffffff;
+    }
+
+    .btn-secondary:active {
+      transform: scale(0.98);
+    }
+
+    .btn-arrow-badge {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 9999px;
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(8px);
+      transition: transform 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .btn-arrow-badge svg {
+      width: 1rem;
+      height: 1rem;
+      stroke: #ffffff;
+    }
+
+    .btn-secondary:hover .btn-arrow-badge {
+      transform: rotate(12deg) scale(1.05);
+    }
+
+    /* Floating Information Cards in Hero Fold */
+    .hero-floating-cards {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      align-items: end;
+      justify-content: space-between;
+      padding-top: 1rem;
+    }
+
+    @media (min-width: 1024px) {
+      .hero-floating-cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+    }
+
+    .glass-card {
+      background: var(--bg-glass-card);
+      border: 1px solid var(--border-glass);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border-radius: 1.5rem;
+      padding: 1.35rem 1.5rem;
+      box-shadow: var(--shadow-glass);
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .glass-card:hover {
+      background: var(--bg-glass-card-hover);
+      border-color: rgba(255, 255, 255, 0.32);
+      transform: translateY(-3px);
+    }
+
+    .hero-floating-cards .glass-card {
+      max-width: 480px;
+    }
+
+    .ml-auto {
+      margin-left: auto;
+    }
+
+    .icon-badge {
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 0.75rem;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      margin-bottom: 0.85rem;
+      transition: transform 0.2s ease;
+    }
+
+    .glass-card:hover .icon-badge {
+      transform: scale(1.06);
+    }
+
+    .icon-badge svg {
+      width: 1.15rem;
+      height: 1.15rem;
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.015em;
+      margin-bottom: 0.45rem;
+    }
+
+    .card-desc {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.85);
+      font-weight: 400;
+      line-height: 1.55;
+    }
+
+    /* ========================================================
+   Banner Section Generic Styles
+   ======================================================== */
+    .banner-section {
+      width: 100%;
+      position: relative;
+      background: rgba(0, 0, 0, 0.65);
+      padding: 6rem 1.5rem;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+
+    @media (min-width: 640px) {
+      .banner-section {
+        padding: 7.5rem 2.5rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .banner-section {
+        padding: 9rem 3.5rem;
+      }
+    }
+
+    .section-container {
+      max-width: 1300px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+      z-index: 10;
+    }
+
+    .flex-col-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Ambient Radial Glow Overlays */
+    .ambient-glow {
+      pointer-events: none;
+      position: absolute;
+      top: 15%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 400px;
+      filter: blur(80px);
+      opacity: 0.75;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .glow-blue {
+      background: radial-gradient(ellipse at center, rgba(0, 102, 255, 0.22), rgba(59, 130, 246, 0.06) 45%, transparent 75%);
+    }
+
+    .glow-emerald {
+      background: radial-gradient(ellipse at center, rgba(16, 185, 129, 0.22), rgba(5, 150, 105, 0.06) 45%, transparent 75%);
+    }
+
+    .glow-amber {
+      background: radial-gradient(ellipse at center, rgba(245, 158, 11, 0.22), rgba(217, 119, 6, 0.06) 45%, transparent 75%);
+    }
+
+    .glow-warm-amber {
+      background: radial-gradient(ellipse at center, rgba(217, 119, 6, 0.2), rgba(180, 83, 9, 0.06) 45%, transparent 75%);
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 2.25rem;
+      font-weight: 400;
+      color: #ffffff;
+      letter-spacing: -0.015em;
+      line-height: 1.08;
+      user-select: none;
+    }
+
+    @media (min-width: 640px) {
+      .section-title {
+        font-size: 3.25rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .section-title {
+        font-size: 4.75rem;
+      }
+    }
+
+    .trademark-symbol {
+      font-size: 1.5rem;
+      vertical-align: super;
+      font-family: var(--font-sans);
+      font-weight: 700;
+      margin-left: 0.35rem;
+      display: inline-block;
+    }
+
+    @media (min-width: 640px) {
+      .trademark-symbol {
+        font-size: 2.25rem;
+      }
+    }
+
+    .section-subtext {
+      margin-top: 1.75rem;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
+
+    .subtext-lead {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.125rem;
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    @media (min-width: 640px) {
+      .subtext-lead {
+        font-size: 1.25rem;
+      }
+    }
+
+    .subtext-body {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.8);
+      margin-top: 0.25rem;
+    }
+
+    .section-divider {
+      width: 100%;
+      max-width: 1300px;
+      border-top: 1px solid var(--border-glass-subtle);
+      margin: 3.5rem auto 2.5rem auto;
+    }
+
+    /* 4-Column Cards Grid */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      width: 100%;
+    }
+
+    @media (min-width: 640px) {
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .cards-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .card-header-group {
+      margin-bottom: 0.75rem;
+    }
+
+    .grid-card-title {
+      font-size: 0.8125rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 0.85rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.35;
+      font-family: var(--font-sans);
+    }
+
+    .grid-card-desc {
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 400;
+      line-height: 1.6;
+      font-family: var(--font-sans);
+    }
+
+    /* ========================================================
+   Section 6: Contact Form Card
+   ======================================================== */
+    .contact-card-wrapper {
+      margin-top: 3rem;
+      width: 100%;
+      max-width: 720px;
+    }
+
+    .contact-card {
+      padding: 2rem 2.25rem;
+    }
+
+    @media (min-width: 640px) {
+      .contact-card {
+        padding: 2.75rem 3rem;
+      }
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+
+    @media (min-width: 640px) {
+      .form-grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      text-align: left;
+    }
+
+    .form-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.8);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-family: var(--font-sans);
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-glass);
+      border-radius: 0.75rem;
+      padding: 0.7rem 1rem;
+      font-size: 0.875rem;
+      color: #ffffff;
+      font-family: var(--font-sans);
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .form-select {
+      background-color: #171717;
+      cursor: pointer;
+    }
+
+    .form-textarea {
+      resize: none;
+    }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus {
+      border-color: #ffffff;
+      background: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 0 0 1px #ffffff;
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .form-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .form-footer {
+        flex-direction: row;
+      }
+    }
+
+    .form-meta-info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.8125rem;
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .meta-icon {
+      width: 0.95rem;
+      height: 0.95rem;
+    }
+
+    .meta-dot {
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-submit {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      background: #ffffff;
+      color: #000000;
+      font-weight: 600;
+      font-size: 0.925rem;
+      padding: 0.7rem 1.75rem;
+      border-radius: 9999px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      font-family: var(--font-sans);
+      width: 100%;
+    }
+
+    @media (min-width: 640px) {
+      .btn-submit {
+        width: auto;
+      }
+    }
+
+    .btn-submit:hover {
+      background: #e5e5e5;
+      transform: translateY(-1px);
+    }
+
+    .btn-submit:active {
+      transform: scale(0.97);
+    }
+
+    .btn-submit svg {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    /* Success Confirmation State */
+    .contact-success,
+    .modal-success {
+      padding: 2.5rem 1rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .success-icon-badge {
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 9999px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .success-icon-badge svg {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    .success-title,
+    .modal-success-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+    }
+
+    .success-desc,
+    .modal-success-desc {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 440px;
+      line-height: 1.6;
+    }
+
+    .btn-reset {
+      margin-top: 1.5rem;
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 0.8125rem;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      cursor: pointer;
+      font-family: var(--font-sans);
+    }
+
+    .btn-reset:hover {
+      color: #ffffff;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* ========================================================
+   Footer
+   ======================================================== */
+    .site-footer {
+      width: 100%;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 2rem 1.5rem;
+      background: rgba(0, 0, 0, 0.85);
+      position: relative;
+      z-index: 20;
+    }
+
+    .footer-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .footer-inner {
+        flex-direction: row;
+      }
+    }
+
+    .footer-copy {
+      font-size: 0.8125rem;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-size: 0.8125rem;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: #ffffff;
+    }
+
+    /* ========================================================
+   Menu Drawer (Slide-Out)
+   ======================================================== */
+    .menu-drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 50;
+      display: flex;
+      justify-content: flex-end;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      pointer-events: none;
+    }
+
+    .menu-drawer-backdrop.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .drawer-panel {
+      width: 100%;
+      max-width: 440px;
+      height: 100%;
+      background: #0a0a0a;
+      border-left: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: -10px 0 40px rgba(0, 0, 0, 0.8);
+    }
+
+    .menu-drawer-backdrop.open .drawer-panel {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .drawer-brand {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      color: #ffffff;
+      text-transform: uppercase;
+    }
+
+    .drawer-close-btn {
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.7);
+      padding: 0.5rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .drawer-close-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .drawer-close-btn svg {
+      width: 1.35rem;
+      height: 1.35rem;
+    }
+
+    .drawer-body {
+      margin: 1.75rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .drawer-section-label {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.5);
+      margin-bottom: 0.75rem;
+    }
+
+    .drawer-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .drawer-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border-radius: 1rem;
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 1.1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: var(--font-sans);
+    }
+
+    .drawer-link:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .drawer-link.active {
+      background: #ffffff;
+      color: #000000;
+      font-weight: 600;
+    }
+
+    .drawer-link svg {
+      width: 1.1rem;
+      height: 1.1rem;
+      opacity: 0.5;
+    }
+
+    .drawer-link.active svg {
+      opacity: 1;
+    }
+
+    .dashboard-drawer-link {
+      text-decoration: none;
+    }
+
+    .drawer-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .highlight-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.85rem;
+      border-radius: 0.85rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .highlight-item svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .highlight-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .highlight-desc {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: 0.2rem;
+      line-height: 1.45;
+    }
+
+    .drawer-footer {
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .drawer-cta-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      background: #ffffff;
+      color: #000000;
+      font-weight: 600;
+      font-size: 0.875rem;
+      padding: 0.85rem 1.25rem;
+      border-radius: 9999px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: var(--font-sans);
+    }
+
+    .drawer-cta-btn:hover {
+      background: #e5e5e5;
+    }
+
+    .drawer-cta-btn svg {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    .drawer-tagline {
+      text-align: center;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 1rem;
+    }
+
+    /* ========================================================
+   Contact / Demo Modal Dialog
+   ======================================================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 60;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      pointer-events: none;
+    }
+
+    .modal-backdrop.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .modal-dialog {
+      width: 100%;
+      max-width: 540px;
+      background: #0f0f0f;
+      border: 1px solid var(--border-glass);
+      border-radius: 1.75rem;
+      padding: 2rem 2.25rem;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+      transform: scale(0.95);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-backdrop.open .modal-dialog {
+      transform: scale(1);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 1.25rem;
+    }
+
+    .modal-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+
+    .modal-subtitle {
+      font-size: 0.8125rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: 0.3rem;
+      line-height: 1.45;
+    }
+
+    .modal-close-btn {
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.7);
+      padding: 0.4rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-left: 0.5rem;
+    }
+
+    .modal-close-btn:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .modal-close-btn svg {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    .modal-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+
+    .modal-action-row {
+      margin-top: 0.5rem;
+    }
+
+    .btn-modal-submit {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.65rem;
+      background: #ffffff;
+      color: #000000;
+      font-weight: 700;
+      font-size: 0.925rem;
+      padding: 0.85rem 1.5rem;
+      border-radius: 9999px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      font-family: var(--font-sans);
+    }
+
+    .btn-modal-submit:hover {
+      background: #e5e5e5;
+      transform: translateY(-1px);
+    }
+
+    .btn-modal-submit:active {
+      transform: scale(0.98);
+    }
+
+    .btn-modal-submit svg {
+      width: 1.1rem;
+      height: 1.1rem;
+    }
+
+    /* ========================================================
+   Scroll Reveal Animations
+   ======================================================== */
+    .reveal-fade {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-fade.is-visible,
+    .reveal-up.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========================================================
+       Global Mobile & Tablet Responsiveness Enhancements
+       ======================================================== */
+    @media (max-width: 1024px) {
+      .hero-floating-cards {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+      }
+      .hero-floating-cards .glass-card {
+        max-width: 100% !important;
+        margin-left: 0 !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .site-header {
+        padding: 0.85rem 1rem !important;
+      }
+      .brand-logo {
+        font-size: 1.25rem !important;
+        letter-spacing: 0.12em !important;
+      }
+      .header-right {
+        gap: 0.5rem !important;
+      }
+      .header-right .portal-cta-btn {
+        padding: 0.4rem 0.75rem !important;
+        font-size: 0.76rem !important;
+      }
+      .hero-section {
+        min-height: auto !important;
+        padding: 6rem 1rem 2rem 1rem !important;
+      }
+      .banner-section {
+        padding: 4.5rem 1.25rem !important;
+      }
+      .section-title {
+        font-size: 2.25rem !important;
+      }
+      .contact-card {
+        padding: 1.75rem 1.25rem !important;
+      }
+      .drawer-panel {
+        max-width: 100% !important;
+        padding: 1.5rem !important;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero-ctas {
+        flex-direction: column !important;
+        width: 100% !important;
+        max-width: 360px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        gap: 0.75rem !important;
+      }
+      .hero-ctas .btn-primary,
+      .hero-ctas .btn-secondary {
+        width: 100% !important;
+        justify-content: center !important;
+        text-align: center !important;
+        box-sizing: border-box !important;
+      }
+      .hud-inner {
+        padding: 0.4rem 0.75rem !important;
+        gap: 0.5rem !important;
+      }
+      .hud-line {
+        width: 1rem !important;
+      }
+      .hero-title {
+        font-size: 2.15rem !important;
+        line-height: 1.2 !important;
+      }
+      .hero-subtitle {
+        font-size: 0.95rem !important;
+      }
+      .section-title {
+        font-size: 1.95rem !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .site-header {
+        padding: 0.7rem 0.85rem !important;
+      }
+      .brand-logo {
+        font-size: 1.1rem !important;
+        letter-spacing: 0.1em !important;
+      }
+      .header-right .portal-cta-btn span:last-child {
+        font-size: 0.74rem !important;
+      }
+      .open-menu-btn {
+        padding: 0.45rem 0.85rem !important;
+        font-size: 0.8rem !important;
+      }
+      .hud-node-sub {
+        display: none !important;
+      }
+      .hud-node-title {
+        font-size: 0.75rem !important;
+      }
+      .cards-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0.9rem !important;
+      }
+    }
+  </style>
 </head>
-<body>
-  <a href="Atithiai_Landing.Page1.html">Open AtithiAI</a>
+
+<body class="bg-black text-white antialiased">
+  <div id="app">
+    <!-- Fixed Ultra 1080p Canvas Background for Smooth Scroll Scrubbing -->
+    <!-- Ambient Glow Lighting Layer -->
+    <div class="ambient-glow-layer">
+      <div class="ambient-orb ambient-orb-1"></div>
+      <div class="ambient-orb ambient-orb-2"></div>
+      <div class="ambient-orb ambient-orb-3"></div>
+    </div>
+
+    <!-- Top Sticky / Fixed Header Navigation -->
+    <header id="site-header" class="site-header">
+      <div class="header-inner">
+        <!-- Brand Logo -->
+        <a href="#hero-banner-fold" id="logo-brand" class="brand-logo">
+          ATITHIAI
+        </a>
+
+        <!-- Desktop Navigation Pills (Strictly Single Line, Centered) -->
+        <nav id="desktop-nav-container" class="desktop-nav" aria-label="Main Navigation">
+          <button type="button" class="nav-pill active" data-target="hero-banner-fold" id="nav-item-home">Home</button>
+          <button type="button" class="nav-pill" data-target="banner-ai-intelligence" id="nav-item-ai-copilot">AI
+            Copilot</button>
+          <button type="button" class="nav-pill" data-target="banner-rural-offline"
+            id="nav-item-offline-first">Offline-First</button>
+          <button type="button" class="nav-pill" data-target="banner-location-intelligence"
+            id="nav-item-location-gis">Location GIS</button>
+          <a href="booking.html" class="nav-pill" id="nav-item-booking" style="text-decoration:none; color:rgba(255,255,255,0.85); display:inline-flex; align-items:center; gap:0.35rem;">
+            <span style="color:#00e5ff;">🏨</span> Book Stays
+          </a>
+          <details class="dashboard-nav-menu">
+            <summary class="dashboard-nav-trigger">
+              Dashboards
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" aria-hidden="true">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </summary>
+            <div class="dashboard-nav-popover">
+              <a class="dashboard-nav-link" href="booking.html" style="color:#00B1C5; font-weight:600;">🏨 Booking Portal (Homestays)</a>
+              <a class="dashboard-nav-link" href="auth.html" style="color:#00B1C5; font-weight:600;">✨ Role Login
+                Portal</a>
+              <a class="dashboard-nav-link" href="Customer_Dashboard1.html">Customer Dashboard</a>
+              <a class="dashboard-nav-link" href="Owner_Dashboard2.html">Owner Dashboard</a>
+              <a class="dashboard-nav-link" href="worker_Dashboard_2.html">Worker Dashboard</a>
+            </div>
+          </details> <button type="button" class="nav-pill" data-target="contact-section"
+            id="nav-item-contact">Contact</button>
+        </nav>
+
+        <!-- Right Action Control: Portal Link + Book Stays + Open Menu -->
+        <div class="header-right" style="display:flex; align-items:center; gap:0.6rem;">
+          <a href="booking.html" id="header-booking-btn" class="portal-cta-btn"
+            style="text-decoration:none; display:inline-flex; align-items:center; gap:0.35rem; padding:0.42rem 0.85rem; border-radius:9999px; background:rgba(0,177,197,0.15); border:1px solid rgba(0,177,197,0.45); color:#00e5ff; font-size:0.8rem; font-weight:600; box-shadow:0 0 12px rgba(0,177,197,0.2); transition:transform 0.2s;">
+            <span>🏨</span>
+            <span>Book Stays</span>
+          </a>
+          <a href="auth.html" id="header-portal-btn" class="portal-cta-btn"
+            style="text-decoration:none; display:inline-flex; align-items:center; gap:0.4rem; padding:0.45rem 0.95rem; border-radius:9999px; background:linear-gradient(135deg, #0066FF, #00B1C5); color:#fff; font-size:0.82rem; font-weight:600; box-shadow:0 4px 15px rgba(0,102,255,0.35); transition:transform 0.2s;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+              <polyline points="10 17 15 12 10 7" />
+              <line x1="15" y1="12" x2="3" y2="12" />
+            </svg>
+            <span>Login Portal</span>
+          </a>
+          <button type="button" id="open-menu-btn" class="open-menu-btn" aria-label="Open menu">
+            <span>Open menu</span>
+            <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="4" y1="12" x2="20" y2="12"></line>
+              <line x1="4" y1="6" x2="20" y2="6"></line>
+              <line x1="4" y1="18" x2="20" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Scrollable Content Layer (Placed Above Canvas) -->
+    <main id="main-content" class="main-content">
+
+      <!-- ========================================================
+          Section 1: Hero Banner Fold
+          Headline: “Smarter Hospitality. Simpler Operations.”
+          Subtext: “AtithiAI is an AI-powered, offline-first operating platform for small hotels, homestays and rural hospitality businesses.”
+          CTAs: “Explore AtithiAI” and “Request Demo”
+          Visual: Subtle HUD showing AI + hospitality + location intelligence
+          Cards 1 & 2: “Run Smarter. Operate Faster.” & “Works Online. Ready Offline.”
+          ======================================================== -->
+      <section id="hero-banner-fold" class="hero-section">
+        <div class="hero-container">
+
+          <!-- Center Content Area -->
+          <div class="hero-center-wrapper">
+            <!-- HUD Visual: AI + Hospitality OS + Location GIS -->
+            <div id="hero-intelligence-visual" class="hero-hud-bar reveal-fade">
+              <div class="hud-inner">
+                <!-- Node 1: AI Copilot -->
+                <div class="hud-node">
+                  <div class="hud-node-icon bg-blue-subtle">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#0066FF" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path
+                        d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" />
+                    </svg>
+                  </div>
+                  <div class="hud-node-text">
+                    <span class="hud-node-title">AI Copilot</span>
+                    <span class="hud-node-sub">Multilingual</span>
+                  </div>
+                </div>
+
+                <!-- Divider 1 -->
+                <div class="hud-connector">
+                  <span class="hud-line"></span>
+                  <svg class="hud-pulse-dot text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <circle cx="12" cy="12" r="2" />
+                  </svg>
+                  <span class="hud-line"></span>
+                </div>
+
+                <!-- Node 2: Hospitality Platform -->
+                <div class="hud-node">
+                  <div class="hud-node-icon bg-emerald-subtle">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z" />
+                      <path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2" />
+                      <path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2" />
+                      <path d="M10 6h4" />
+                      <path d="M10 10h4" />
+                      <path d="M10 14h4" />
+                      <path d="M10 18h4" />
+                    </svg>
+                  </div>
+                  <div class="hud-node-text">
+                    <span class="hud-node-title">Hospitality OS</span>
+                    <span class="hud-node-sub">Homestay · Hotel</span>
+                  </div>
+                </div>
+
+                <!-- Divider 2 -->
+                <div class="hud-connector">
+                  <span class="hud-line"></span>
+                  <svg class="hud-pulse-dot text-amber" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <circle cx="12" cy="12" r="2" />
+                  </svg>
+                  <span class="hud-line"></span>
+                </div>
+
+                <!-- Node 3: Location GIS -->
+                <div class="hud-node">
+                  <div class="hud-node-icon bg-amber-subtle">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path
+                        d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg>
+                  </div>
+                  <div class="hud-node-text">
+                    <span class="hud-node-title">Location GIS</span>
+                    <span class="hud-node-sub">GPS & Offline</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Main Headline -->
+            <h1 id="hero-headline" class="hero-title reveal-fade">
+              Smarter Hospitality.<br>Simpler Operations.
+            </h1>
+
+            <!-- Subtitle -->
+            <p id="hero-subtitle" class="hero-subtitle reveal-fade">
+              AtithiAI is an AI-powered, offline-first operating platform for small hotels, homestays and rural
+              hospitality businesses.
+            </p>
+
+            <!-- Dual CTAs + Portal CTA + Homestay Booking -->
+            <div class="hero-ctas reveal-fade">
+              <!-- CTA 1: Book Homestays (Direct 0% Brokerage) -->
+              <a href="booking.html" id="cta-book-stays" class="btn-primary" style="background:linear-gradient(135deg, #00B1C5 0%, #0066FF 100%); box-shadow:0 4px 20px rgba(0, 177, 197, 0.45), 0 0 15px rgba(0, 102, 255, 0.3);">
+                <span style="font-size:1.05rem;">🏨</span>
+                <span>Book Homestays (0% Fee)</span>
+              </a>
+
+              <!-- CTA 2: Explore AtithiAI -->
+              <a href="#banner-ai-intelligence" id="cta-explore-atithiai" class="btn-primary">
+                <span>Explore AtithiAI</span>
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <polyline points="19 12 12 19 5 12"></polyline>
+                </svg>
+              </a>
+
+              <!-- CTA 3: Portal Login -->
+              <a href="auth.html" id="cta-portal-login" class="btn-primary">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                  <polyline points="10 17 15 12 10 7"></polyline>
+                  <line x1="15" y1="12" x2="3" y2="12"></line>
+                </svg>
+                <span>Login Portal</span>
+              </a>
+
+              <!-- CTA 4: Request Demo -->
+              <button type="button" id="cta-request-demo" class="btn-secondary open-demo-trigger">
+                <span>Request Demo</span>
+                <span class="btn-arrow-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Bottom Floating Information Cards 1 & 2 -->
+          <div class="hero-floating-cards">
+            <!-- Card 1: Run Smarter. Operate Faster. -->
+            <div id="card-run-smarter" class="glass-card reveal-up">
+              <div class="icon-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#0066FF" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <rect width="16" height="16" x="4" y="4" rx="2" />
+                  <rect width="6" height="6" x="9" y="9" rx="1" />
+                  <path d="M15 2v2" />
+                  <path d="M15 20v2" />
+                  <path d="M2 15h2" />
+                  <path d="M2 9h2" />
+                  <path d="M20 15h2" />
+                  <path d="M20 9h2" />
+                  <path d="M9 2v2" />
+                  <path d="M9 20v2" />
+                </svg>
+              </div>
+              <h2 id="title-run-smarter" class="card-title">Run Smarter. Operate Faster.</h2>
+              <p id="desc-run-smarter" class="card-desc">
+                AI-powered tools to simplify daily operations, compliance, guest service, and decision-making.
+              </p>
+            </div>
+
+            <!-- Card 2: Works Online. Ready Offline. -->
+            <div id="card-works-online" class="glass-card ml-auto reveal-up">
+              <div class="icon-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#0066FF" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <line x1="2" y1="2" x2="22" y2="22" />
+                  <path d="M8.5 16.5a5 5 0 0 1 7 0" />
+                  <path d="M2 8.82a15 15 0 0 1 4.17-2.65" />
+                  <path d="M10.66 5c4.01-.36 8.14.9 11.34 3.76" />
+                  <path d="M16.85 11.25a10 10 0 0 1 2.22 1.68" />
+                  <path d="M5 13a10 10 0 0 1 5.24-2.76" />
+                  <line x1="12" y1="20" x2="12.01" y2="20" />
+                </svg>
+              </div>
+              <h2 id="title-works-online" class="card-title">Works Online. Ready Offline.</h2>
+              <p id="desc-works-online" class="card-desc">
+                Offline-first technology with GIS, GPS, and multilingual AI—designed for hotels and homestays anywhere
+                in India.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================
+          Section 2: Banner 2 — AI Intelligence
+          Headline: “Your Digital Hospitality Copilot”
+          Subtext: “Turn property data, guest feedback and compliance information into intelligent insights and actionable recommendations.”
+          ======================================================== -->
+      <section id="banner-ai-intelligence" class="banner-section banner-ai">
+        <!-- Ambient Radial Glow -->
+        <div class="ambient-glow glow-blue" aria-hidden="true"></div>
+
+        <div class="section-container">
+          <div class="section-header reveal-fade">
+            <h2 id="ai-intelligence-headline" class="section-title font-display-italic">
+              Your Digital<br>Hospitality Copilot<span id="ai-trademark-symbol"
+                class="trademark-symbol text-blue">®</span>
+            </h2>
+            <div id="ai-intelligence-subtext" class="section-subtext">
+              <p class="subtext-lead">Turn property data, guest feedback and compliance information</p>
+              <p class="subtext-body">into intelligent insights and actionable recommendations.</p>
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div class="section-divider"></div>
+
+          <!-- 4 Cards Grid -->
+          <div id="ai-intelligence-cards-grid" class="cards-grid">
+            <!-- AI Card 1 -->
+            <div id="ai-card-1" class="glass-card reveal-up">
+              <div class="card-header-group">
+                <div class="icon-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#0066FF" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                    <path d="M13 8H7" />
+                    <path d="M17 12H7" />
+                  </svg>
+                </div>
+                <h3 class="grid-card-title">GUEST FEEDBACK & SENTIMENT</h3>
+              </div>
+              <p class="grid-card-desc">
+                Instantly aggregates reviews and messaging sentiment across languages to highlight guest satisfaction
+                and pain points.
+              </p>
+            </div>
+
+            <!-- AI Card 2 -->
+            <div id="ai-card-2" class="glass-card reveal-up">
+              <div class="card-header-group">
+                <div class="icon-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#0066FF" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+                    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                    <path d="m9 15 2 2 4-4" />
+                  </svg>
+                </div>
+                <h3 class="grid-card-title">COMPLIANCE & VERIFICATION</h3>
+              </div>
+              <p class="grid-card-desc">
+                Automates guest registration (Form-C), police station logging, and local tax records without
+                administrative manual friction.
+              </p>
+            </div>
+
+            <!-- AI Card 3 -->
+            <div id="ai-card-3" class="glass-card reveal-up">
+              <div class="card-header-group">
+                <div class="icon-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#0066FF" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                    <polyline points="16 7 22 7 22 13" />
+                  </svg>
+                </div>
+                <h3 class="grid-card-title">DYNAMIC PRICING INTELLIGENCE</h3>
+              </div>
+              <p class="grid-card-desc">
+                Calculates optimal room rates based on regional tourism surges, local festivals, and weather patterns.
+              </p>
+            </div>
+
+            <!-- AI Card 4 -->
+            <div id="ai-card-4" class="glass-card reveal-up">
+              <div class="card-header-group">
+                <div class="icon-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#0066FF" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M21 7.5V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.5" />
+                    <path d="M16 2v4" />
+                    <path d="M8 2v4" />
+                    <path d="M3 10h18" />
+                    <circle cx="16" cy="16" r="6" />
+                    <polyline points="16 14 16 16 18 16" />
+                  </svg>
+                </div>
+                <h3 class="grid-card-title">TASK & WORKFLOW AUTOMATION</h3>
+              </div>
+              <p class="grid-card-desc">
+                Translates operational logs into immediate daily checklists for housekeeping, inventory restocking, and
+                front desk.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================
+          Section 3: Banner 3 — Rural & Offline
+          Headline: “Works Online. Ready Offline.”
+          Subtext: “Manage essential hotel and homestay operations even with unreliable connectivity, with automatic synchronization when you're back online.”
+          ======================================================== -->
+      <section id="banner-rural-offline" class="banner-section banner-rural">
+        <!-- Ambient Radial Glow -->
+        <div class="ambient-glow glow-emerald" aria-hidden="true"></div>
+
+        <div class="section-container">
+          <div class="section-header reveal-fade">
+            <h2 id="rural-offline-headline" class="section-title font-display-italic">
+              Works Online.<br>Ready Offline.<span id="offline-trademark-symbol"
+                class="trademark-symbol text-emerald">®</span>
+            </h2>
+            <div id="rural-offline-subtext" class="section-subtext">
+              <p class="subtext-lead">Manage essential hotel and homestay operations</p>
+              <p class="subtext-body">even with unreliable connectivity, with automatic synchronization when you're back
+                online.</p>
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div class="section-divider"></div>
+
+          <!-- 4 Cards Grid -->
+          <div id="rural-offline-cards-grid" class="cards-grid">
+            <!-- Offline Card 1 -->
+            <div id="offline-card-1" class="glass-card reveal-up">
+              <div class="card-header-group">
+                <div class="icon-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#0066FF" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <line x1="2" y1="2" x2="22" y2="22" />
+                    <path d="M8.5 16.5a5 5 0 0 1 7 0" />
+                    <path d="M2 8.82a15 15 0 0 1 4.17-2.65" />
+                    <path d="M10.66 5c4.01-.36 8.14.9 11.34 3.76" />
+                    <path d="M16.85 11.25a10 10 0 0 1 2.22 1.68" />
+                    <path d="M5 13a10 10 0 0 1 5.24-2.76" />
+                    <line x1="12" y1="20" x2="12.01" y2="20" />
+                  </svg>
+                </div>
+                <h3 class="grid-card-title">LOCAL-FIRST DATA ENGINE</h3>
+              </div>
+              <p class="grid-card-desc">
+                Core PMS, bookings, guest check-in, and billing run securely on your local device without needing an
+                active internet connection.
+              </p>
+            </div>
+
+            <!-- Offline Card 2 -->
+            <div id="offline-card-2" class="glass-card reveal-up">
+              <div class="card-header-group">
+                <div class="icon-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#0066FF" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
+                    <path d="M21 3v5h-5" />
+                    <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
+                    <path d="M8 16H3v5" />
+                  </svg>
+                </div>
+                <h3 class="grid-card-title">AUTO-SYNC ON RECONNECTION</h3>
+              </div>
+              <p class="grid-card-desc">
+                Seamlessly syncs offline updates, bookings, and payments with the cloud as soon as cellular or Wi-Fi
+                connectivity returns.
+              </p>
+            </div>
+
+            <!-- Offline Card 3 -->
+            <div id="offline-card-3" class="glass-card reveal-up">
+              <div class="card-header-group">
+                <div class="icon-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#0066FF" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <rect width="14" height="20" x="5" y="2" rx="2" ry="2" />
+                    <path d="M12 18h.01" />
+                  </svg>
+                </div>
+                <h3 class="grid-card-title">LOCAL PEER-TO-PEER MESH</h3>
+              </div>
+              <p class="grid-card-desc">
+                Connect front-desk and housekeeping staff devices over a local Wi-Fi or offline hotspot with zero
+                external data consumption.
+              </p>
+            </div>
+
+            <!-- Offline Card 4 -->
+            <div id="offline-card-4" class="glass-card reveal-up">
+              <div class="card-header-group">
+                <div class="icon-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#0066FF" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z" />
+                    <path d="M14 8H8" />
+                    <path d="M16 12H8" />
+                    <path d="M13 16H8" />
+                  </svg>
+                </div>
+                <h3 class="grid-card-title">OFFLINE BILLING & ORDERS</h3>
+              </div>
+              <p class="grid-card-desc">
+                Issue invoices, print GST receipts, and route kitchen order tickets (KOT) smoothly without internet
+                interruptions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================
+          Section 4: Banner 4 — Location Intelligence
+          Headline: “Discover. Locate. Grow.”
+          Subtext: “Use GIS and GPS-powered location intelligence to understand your property, nearby attractions and tourism opportunities.”
+          ======================================================== -->
+      <section id="banner-location-intelligence" class="banner-section banner-location">
+        <!-- Ambient Radial Glow -->
+        <div class="ambient-glow glow-amber" aria-hidden="true"></div>
+
+        <div class="section-container">
+          <div class="section-header reveal-fade">
+            <h2 id="location-intelligence-headline" class="section-title font-display-italic">
+              Discover.<br>Locate. Grow.<span id="location-trademark-symbol"
+                class="trademark-symbol text-amber">®</span>
+            </h2>
+            <div id="location-intelligence-subtext" class="section-subtext">
+              <p class="subtext-lead">Use GIS and GPS-powered location intelligence</p>
+              <p class="subtext-body">to understand your property, nearby attractions and tourism opportunities.</p>
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div class="section-divider"></div>
+
+          <!-- 4 Cards Grid -->
+          <div id="location-intelligence-cards-grid" class="cards-grid">
+            <!-- Location Card 1 -->
+            <div id="location-card-1" class="glass-card reveal-up">
+              <div class="card-header-group">
+                <div class="icon-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#0066FF" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path
+                      d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                </div>
+                <h3 class="grid-card-title">GIS PROPERTY MAPPING</h3>
+              </div>
+              <p class="grid-card-desc">
+                Map physical boundaries, landscape features, scenic view points, and trails with high-precision GPS
+                coordinate recording.
+              </p>
+            </div>
+
+            <!-- Location Card 2 -->
+            <div id="location-card-2" class="glass-card reveal-up">
+              <div class="card-header-group">
+                <div class="icon-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#0066FF" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+                  </svg>
+                </div>
+                <h3 class="grid-card-title">HYPERLOCAL ATTRACTIONS</h3>
+              </div>
+              <p class="grid-card-desc">
+                Curate authentic recommendations for guests—from undiscovered waterfalls to ancient shrines and cultural
+                craft hubs.
+              </p>
+            </div>
+
+            <!-- Location Card 3 -->
+            <div id="location-card-3" class="glass-card reveal-up">
+              <div class="card-header-group">
+                <div class="icon-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#0066FF" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <polygon points="3 11 22 2 13 21 11 13 3 11" />
+                  </svg>
+                </div>
+                <h3 class="grid-card-title">OFFLINE GUEST NAVIGATION</h3>
+              </div>
+              <p class="grid-card-desc">
+                Provide your guests with downloadable digital hiking maps and directions that function accurately even
+                with zero mobile signal.
+              </p>
+            </div>
+
+            <!-- Location Card 4 -->
+            <div id="location-card-4" class="glass-card reveal-up">
+              <div class="card-header-group">
+                <div class="icon-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#0066FF" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <line x1="18" y1="20" x2="18" y2="10" />
+                    <line x1="12" y1="20" x2="12" y2="4" />
+                    <line x1="6" y1="20" x2="6" y2="14" />
+                  </svg>
+                </div>
+                <h3 class="grid-card-title">TOURISM CORRIDOR ANALYTICS</h3>
+              </div>
+              <p class="grid-card-desc">
+                Identify traveler footfall patterns and seasonal corridor trends to launch targeted offerings and expand
+                your hospitality revenue.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================
+          Section 5: Supporting Industry Trust Section
+          Headline: “Built for India’s Next Generation of Hospitality”
+          ======================================================== -->
+      <section id="trusted-brands-section" class="banner-section banner-trust">
+        <!-- Ambient Radial Glow -->
+        <div class="ambient-glow glow-warm-amber" aria-hidden="true"></div>
+
+        <div class="section-container text-center">
+          <div class="max-w-4xl mx-auto reveal-fade">
+            <h2 id="trusted-headline" class="section-title font-display-italic">
+              Built for India’s Next Generation<br>of Hospitality
+            </h2>
+            <div id="trusted-subtext" class="section-subtext mt-6">
+              <p class="subtext-lead font-normal text-white/90">
+                AtithiAI brings AI, digital operations, compliance, location intelligence and offline-first technology
+                together to empower small hospitality businesses across India.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================
+          Section 6: Contact Section
+          Headline: “Let’s Build Smarter Hospitality Together”
+          Interactive Form
+          ======================================================== -->
+      <section id="contact-section" class="banner-section banner-contact">
+        <!-- Ambient Radial Glow -->
+        <div class="ambient-glow glow-blue" aria-hidden="true"></div>
+
+        <div class="section-container flex-col-center">
+          <div class="section-header text-center reveal-fade">
+            <h2 id="contact-headline" class="section-title font-display-italic">
+              Let’s Build Smarter Hospitality Together
+            </h2>
+            <div id="contact-subtext" class="section-subtext">
+              <p class="subtext-body">
+                Have a question, want to explore AtithiAI for your property, or interested in partnering with us? We’d
+                love to hear from you.
+              </p>
+            </div>
+          </div>
+
+          <!-- Interactive Contact Form Card -->
+          <div class="contact-card-wrapper reveal-up">
+            <div id="contact-form-container" class="contact-card glass-card">
+              <!-- Live Form -->
+              <form id="contact-form" class="contact-form" autocomplete="on">
+                <div class="form-grid-2">
+                  <div class="form-group">
+                    <label for="contact-name" class="form-label">Full Name</label>
+                    <input id="contact-name" name="name" type="text" required placeholder="e.g. Ramesh Sharma"
+                      class="form-input">
+                  </div>
+                  <div class="form-group">
+                    <label for="contact-email" class="form-label">Email Address</label>
+                    <input id="contact-email" name="email" type="email" required placeholder="ramesh@property.in"
+                      class="form-input">
+                  </div>
+                </div>
+
+                <div class="form-grid-2">
+                  <div class="form-group">
+                    <label for="contact-phone" class="form-label">Phone / WhatsApp</label>
+                    <input id="contact-phone" name="phone" type="tel" placeholder="+91 98765 43210" class="form-input">
+                  </div>
+                  <div class="form-group">
+                    <label for="contact-property-type" class="form-label">Property or Inquirer Type</label>
+                    <select id="contact-property-type" name="propertyType" class="form-select">
+                      <option value="Homestay">Homestay Owner</option>
+                      <option value="Boutique Hotel">Boutique Hotel / Resort</option>
+                      <option value="Rural Tourism">Rural / Eco-Tourism Project</option>
+                      <option value="Partner">Prospective Partner / Distributor</option>
+                      <option value="Other">Other Inquiry</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="contact-message" class="form-label">Message / Property Details</label>
+                  <textarea id="contact-message" name="message" rows="3" required
+                    placeholder="Tell us about your property location, room count, or how we can collaborate..."
+                    class="form-textarea"></textarea>
+                </div>
+
+                <div class="form-footer">
+                  <div class="form-meta-info">
+                    <div class="meta-item">
+                      <svg class="meta-icon text-amber" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <path
+                          d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+                        <circle cx="12" cy="10" r="3" />
+                      </svg>
+                      <span>Pan-India</span>
+                    </div>
+                    <span class="meta-dot">•</span>
+                    <div class="meta-item">
+                      <svg class="meta-icon text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2">
+                        <rect width="20" height="16" x="2" y="4" rx="2" />
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                      </svg>
+                      <span>hello@atithiai.in</span>
+                    </div>
+                  </div>
+
+                  <button type="submit" id="contact-submit-btn" class="btn-submit">
+                    <span>Send Message</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <line x1="22" y1="2" x2="11" y2="13"></line>
+                      <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                  </button>
+                </div>
+              </form>
+
+              <!-- Success State Confirmation -->
+              <div id="contact-success-state" class="contact-success hidden">
+                <div class="success-icon-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                    <polyline points="22 4 12 14.01 9 11.01" />
+                  </svg>
+                </div>
+                <h3 class="success-title">Message Received</h3>
+                <p class="success-desc">
+                  Thank you for reaching out, <span id="confirmed-sender-name"
+                    class="font-bold text-white">there</span>! Our hospitality technology team will get back to you
+                  promptly.
+                </p>
+                <button type="button" id="contact-reset-btn" class="btn-reset">
+                  Send another message
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer Bar -->
+      <footer class="site-footer">
+        <div class="footer-inner">
+          <p class="footer-copy">© 2026 AtithiAI Technologies. All rights reserved.</p>
+          <div class="footer-links">
+            <a href="#hero-banner-fold">Home</a>
+            <a href="#banner-ai-intelligence">AI Copilot</a>
+            <a href="#banner-rural-offline">Offline-First</a>
+            <a href="#banner-location-intelligence">Location GIS</a>
+            <a href="#contact-section">Contact</a>
+          </div>
+        </div>
+      </footer>
+
+    </main>
+
+    <!-- Slide-Out Menu Drawer -->
+    <div id="menu-drawer" class="menu-drawer-backdrop" aria-hidden="true">
+      <div class="drawer-panel">
+        <div class="drawer-header">
+          <span class="drawer-brand">ATITHIAI</span>
+          <button type="button" id="close-menu-btn" class="drawer-close-btn" aria-label="Close menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <div class="drawer-body">
+          <div class="drawer-nav-group">
+            <p class="drawer-section-label">Navigation</p>
+            <div class="drawer-links">
+              <a class="drawer-link" href="booking.html" style="color:#00e5ff; font-weight:600; text-decoration:none;">
+                <span>🏨 Book Homestays (0% Fee)</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </a>
+              <button type="button" class="drawer-link active" data-target="hero-banner-fold">
+                <span>Home</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </button>
+              <button type="button" class="drawer-link" data-target="banner-ai-intelligence">
+                <span>AI Copilot</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </button>
+              <button type="button" class="drawer-link" data-target="banner-rural-offline">
+                <span>Offline-First</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </button>
+              <button type="button" class="drawer-link" data-target="banner-location-intelligence">
+                <span>Location GIS</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </button>
+              <button type="button" class="drawer-link" data-target="contact-section">
+                <span>Contact</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="drawer-nav-group">
+            <p class="drawer-section-label">Dashboards & Portals</p>
+            <div class="drawer-links">
+              <a class="drawer-link dashboard-drawer-link" href="booking.html" style="color:#00e5ff; font-weight:600;">
+                <span>🏨 Booking Portal (Homestays)</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </a>
+              <a class="drawer-link dashboard-drawer-link" href="auth.html" style="color:#00B1C5; font-weight:600;">
+                <span>✨ Role Login Portal</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </a>
+              <a class="drawer-link dashboard-drawer-link" href="Customer_Dashboard1.html">
+                <span>Customer Dashboard</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </a>
+              <a class="drawer-link dashboard-drawer-link" href="Owner_Dashboard2.html">
+                <span>Owner Dashboard</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </a>
+              <a class="drawer-link dashboard-drawer-link" href="worker_Dashboard_2.html">
+                <span>Worker Dashboard</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="drawer-highlights">
+            <p class="drawer-section-label">Platform Highlights</p>
+            <div class="highlight-item">
+              <svg class="text-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+              </svg>
+              <div>
+                <p class="highlight-title">Run Smarter. Operate Faster.</p>
+                <p class="highlight-desc">AI-powered tools to simplify daily operations and compliance.</p>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <svg class="text-emerald" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="5" />
+                <line x1="12" y1="1" x2="12" y2="3" />
+                <line x1="12" y1="21" x2="12" y2="23" />
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                <line x1="1" y1="12" x2="3" y2="12" />
+                <line x1="21" y1="12" x2="23" y2="12" />
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+              </svg>
+              <div>
+                <p class="highlight-title">Works Online. Ready Offline.</p>
+                <p class="highlight-desc">Offline-first with GIS, GPS, and multilingual AI for rural hospitality.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="drawer-footer">
+          <button type="button" id="drawer-explore-cta" class="drawer-cta-btn open-demo-trigger">
+            <span>Explore AtithiAI · Request Demo</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </button>
+          <p class="drawer-tagline">AtithiAI • Offline-First Hospitality OS</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Contact / Demo Request Modal -->
+    <div id="contact-modal" class="modal-backdrop" aria-hidden="true">
+      <div class="modal-dialog glass-card">
+        <div class="modal-header">
+          <div>
+            <h3 class="modal-title">Request AtithiAI Demo</h3>
+            <p class="modal-subtitle">Discover how AtithiAI can empower your hotel, homestay, or resort.</p>
+          </div>
+          <button type="button" id="close-modal-btn" class="modal-close-btn" aria-label="Close dialog">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Live Demo Form -->
+        <form id="demo-modal-form" class="modal-form">
+          <div class="form-group">
+            <label for="demo-name" class="form-label">Full Name</label>
+            <input id="demo-name" type="text" required placeholder="e.g. Rajesh Sharma" class="form-input">
+          </div>
+
+          <div class="form-group">
+            <label for="demo-property" class="form-label">Hotel / Homestay Name</label>
+            <input id="demo-property" type="text" required placeholder="Pahadi Heritage Homestay" class="form-input">
+          </div>
+
+          <div class="form-group">
+            <label for="demo-email" class="form-label">Email / Phone</label>
+            <input id="demo-email" type="text" required placeholder="rajesh@homestay.com" class="form-input">
+          </div>
+
+          <div class="form-group">
+            <label for="demo-property-type" class="form-label">Property Type</label>
+            <select id="demo-property-type" class="form-select">
+              <option value="Homestay">Boutique Homestay / Bed & Breakfast</option>
+              <option value="Small Hotel">Small / Independent Hotel (10-50 rooms)</option>
+              <option value="Rural Resort">Rural / Eco Resort</option>
+              <option value="Hostel">Backpacker Hostel / Campsite</option>
+            </select>
+          </div>
+
+          <div class="modal-action-row">
+            <button type="submit" class="btn-modal-submit">
+              <span>Schedule Walkthrough Demo</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </button>
+          </div>
+        </form>
+
+        <!-- Demo Success State -->
+        <div id="demo-success-state" class="modal-success hidden">
+          <div class="success-icon-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="22 4 12 14.01 9 11.01" />
+            </svg>
+          </div>
+          <h4 class="modal-success-title">Demo Request Received</h4>
+          <p class="modal-success-desc">
+            Thank you, <span id="confirmed-demo-name" class="font-bold text-white">there</span>! An AtithiAI hospitality
+            consultant will reach out within 24 hours to schedule your personalized walkthrough.
+          </p>
+          <button type="button" id="demo-close-success-btn" class="btn-primary"
+            style="margin-top: 1.5rem; justify-content: center; width: 100%;">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    (() => {
+      /* ========================================================
+         2. ScrollSpy & Sticky Header Management
+         ======================================================== */
+      const header = document.getElementById('site-header');
+      const navPills = document.querySelectorAll('.nav-pill');
+      const drawerLinks = document.querySelectorAll('.drawer-link');
+      const sections = [
+        { id: 'hero-banner-fold', targetPill: 'nav-item-home' },
+        { id: 'banner-ai-intelligence', targetPill: 'nav-item-ai-copilot' },
+        { id: 'banner-rural-offline', targetPill: 'nav-item-offline-first' },
+        { id: 'banner-location-intelligence', targetPill: 'nav-item-location-gis' },
+        { id: 'contact-section', targetPill: 'nav-item-contact' }
+      ];
+
+      function handleScroll() {
+        const scrollY = window.scrollY;
+
+        // Header background change on scroll
+        if (scrollY > 50) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+
+        // Determine active section
+        const viewportHeight = window.innerHeight;
+        let currentSectionId = sections[0].id;
+
+        for (let i = 0; i < sections.length; i++) {
+          const el = document.getElementById(sections[i].id);
+          if (el) {
+            const rect = el.getBoundingClientRect();
+            // Section is active if its top is above the middle of viewport and bottom is below top
+            if (rect.top <= viewportHeight * 0.45 && rect.bottom > 100) {
+              currentSectionId = sections[i].id;
+            }
+          }
+        }
+
+        // Update desktop pills
+        navPills.forEach(pill => {
+          if (pill.getAttribute('data-target') === currentSectionId) {
+            pill.classList.add('active');
+          } else {
+            pill.classList.remove('active');
+          }
+        });
+
+        // Update drawer links
+        drawerLinks.forEach(link => {
+          if (link.getAttribute('data-target') === currentSectionId) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      }
+
+      /* ========================================================
+         3. Smooth Section Navigation Triggering
+         ======================================================== */
+      function scrollToSection(targetId) {
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          const headerOffset = 70;
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: targetId === 'hero-banner-fold' ? 0 : offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
+
+      navPills.forEach(pill => {
+        pill.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = pill.getAttribute('data-target');
+          scrollToSection(targetId);
+        });
+      });
+
+      drawerLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('data-target');
+          closeDrawer();
+          scrollToSection(targetId);
+        });
+      });
+
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', (e) => {
+          const href = anchor.getAttribute('href');
+          if (href && href !== '#') {
+            e.preventDefault();
+            const targetId = href.substring(1);
+            scrollToSection(targetId);
+          }
+        });
+      });
+
+      /* ========================================================
+         4. Menu Drawer Open / Close Logic
+         ======================================================== */
+      const menuDrawer = document.getElementById('menu-drawer');
+      const openMenuBtn = document.getElementById('open-menu-btn');
+      const closeMenuBtn = document.getElementById('close-menu-btn');
+
+      function openDrawer() {
+        menuDrawer.classList.add('open');
+        menuDrawer.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeDrawer() {
+        menuDrawer.classList.remove('open');
+        menuDrawer.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      if (openMenuBtn) openMenuBtn.addEventListener('click', openDrawer);
+      if (closeMenuBtn) closeMenuBtn.addEventListener('click', closeDrawer);
+
+      menuDrawer.addEventListener('click', (e) => {
+        if (e.target === menuDrawer) {
+          closeDrawer();
+        }
+      });
+
+      /* ========================================================
+         5. Contact / Demo Modal Logic
+         ======================================================== */
+      const contactModal = document.getElementById('contact-modal');
+      const closeModalBtn = document.getElementById('close-modal-btn');
+      const demoForm = document.getElementById('demo-modal-form');
+      const demoSuccessState = document.getElementById('demo-success-state');
+      const demoCloseSuccessBtn = document.getElementById('demo-close-success-btn');
+      const confirmedDemoName = document.getElementById('confirmed-demo-name');
+
+      function openModal() {
+        closeDrawer();
+        contactModal.classList.add('open');
+        contactModal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        contactModal.classList.remove('open');
+        contactModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+      }
+
+      document.querySelectorAll('.open-demo-trigger').forEach(btn => {
+        btn.addEventListener('click', openModal);
+      });
+
+      if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+      if (demoCloseSuccessBtn) demoCloseSuccessBtn.addEventListener('click', () => {
+        closeModal();
+        // Reset modal form state
+        if (demoForm) {
+          demoForm.reset();
+          demoForm.classList.remove('hidden');
+        }
+        if (demoSuccessState) {
+          demoSuccessState.classList.add('hidden');
+        }
+      });
+
+      contactModal.addEventListener('click', (e) => {
+        if (e.target === contactModal) {
+          closeModal();
+        }
+      });
+
+      // Handle Demo Modal Form Submission
+      if (demoForm) {
+        demoForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const nameInput = document.getElementById('demo-name');
+          const senderName = nameInput ? nameInput.value.trim() : 'there';
+
+          if (confirmedDemoName) confirmedDemoName.textContent = senderName || 'there';
+
+          demoForm.classList.add('hidden');
+          if (demoSuccessState) demoSuccessState.classList.remove('hidden');
+        });
+      }
+
+      /* ========================================================
+         6. Main Contact Form Submission & Reset Logic
+         ======================================================== */
+      const contactForm = document.getElementById('contact-form');
+      const contactSuccessState = document.getElementById('contact-success-state');
+      const contactResetBtn = document.getElementById('contact-reset-btn');
+      const confirmedSenderName = document.getElementById('confirmed-sender-name');
+
+      if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const nameInput = document.getElementById('contact-name');
+          const senderName = nameInput ? nameInput.value.trim() : 'there';
+
+          if (confirmedSenderName) confirmedSenderName.textContent = senderName || 'there';
+
+          contactForm.classList.add('hidden');
+          if (contactSuccessState) contactSuccessState.classList.remove('hidden');
+        });
+      }
+
+      if (contactResetBtn) {
+        contactResetBtn.addEventListener('click', () => {
+          if (contactForm) {
+            contactForm.reset();
+            contactForm.classList.remove('hidden');
+          }
+          if (contactSuccessState) {
+            contactSuccessState.classList.add('hidden');
+          }
+        });
+      }
+
+      // Global ESC key listener to close active overlays
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          if (contactModal.classList.contains('open')) closeModal();
+          if (menuDrawer.classList.contains('open')) closeDrawer();
+        }
+      });
+
+      /* ========================================================
+         7. Scroll Reveal Animation via IntersectionObserver
+         ======================================================== */
+      function initScrollReveal() {
+        const revealElements = document.querySelectorAll('.reveal-fade, .reveal-up');
+
+        if ('IntersectionObserver' in window) {
+          const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -40px 0px'
+          });
+
+          revealElements.forEach(el => revealObserver.observe(el));
+        } else {
+          // Fallback
+          revealElements.forEach(el => el.classList.add('is-visible'));
+        }
+      }
+
+      window.addEventListener("scroll", handleScroll, { passive: true });
+
+      // AI Copilot header pill trigger
+      const aiPill = document.getElementById('nav-item-ai-copilot');
+      if (aiPill) {
+        aiPill.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (window.AtithiAiAgent) window.AtithiAiAgent.open({ context: 'landing' });
+        });
+      }
+
+      // Automatic Top-Down Popover on Hover for Dashboards nav element
+      const dashboardMenu = document.querySelector('.dashboard-nav-menu');
+      if (dashboardMenu) {
+        let timer = null;
+        dashboardMenu.addEventListener('mouseenter', () => {
+          clearTimeout(timer);
+          dashboardMenu.open = true;
+        });
+        dashboardMenu.addEventListener('mouseleave', () => {
+          timer = setTimeout(() => {
+            dashboardMenu.open = false;
+          }, 200);
+        });
+      }
+
+      // Initial Run
+      initScrollReveal();
+      handleScroll();
+    })();
+
+  </script>
+  <script src="atithiai-n8n-agent.js"></script>
 </body>
+
 </html>

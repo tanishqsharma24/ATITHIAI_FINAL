@@ -519,20 +519,22 @@ app.use((req, res) => {
 });
 
 // -------------------------------------------------------------
-// Server Start
+// Server Start (Only when run directly, not in Vercel Serverless)
 // -------------------------------------------------------------
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`\n======================================================`);
-  console.log(`  🚀 AtithiAI Hospitality Platform Server Running!`);
-  console.log(`======================================================`);
-  console.log(`  Local URL:        http://localhost:${PORT}/`);
-  console.log(`  Login Portal:     http://localhost:${PORT}/auth.html`);
-  console.log(`  Landing Page:     http://localhost:${PORT}/Atithiai_Landing.Page1.html`);
-  console.log(`  Customer Stay:    http://localhost:${PORT}/Customer_Dashboard1.html`);
-  console.log(`  Owner Dashboard:  http://localhost:${PORT}/Owner_Dashboard2.html`);
-  console.log(`  Worker Dashboard: http://localhost:${PORT}/worker_Dashboard_2.html`);
-  console.log(`  API Status:       http://localhost:${PORT}/api/stats`);
-  console.log(`======================================================\n`);
-});
+if (!process.env.VERCEL && require.main === module) {
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`\n======================================================`);
+    console.log(`  🚀 AtithiAI Hospitality Platform Server Running!`);
+    console.log(`======================================================`);
+    console.log(`  Local URL:        http://localhost:${PORT}/`);
+    console.log(`  Login Portal:     http://localhost:${PORT}/auth.html`);
+    console.log(`  Landing Page:     http://localhost:${PORT}/Atithiai_Landing.Page1.html`);
+    console.log(`  Customer Stay:    http://localhost:${PORT}/Customer_Dashboard1.html`);
+    console.log(`  Owner Dashboard:  http://localhost:${PORT}/Owner_Dashboard2.html`);
+    console.log(`  Worker Dashboard: http://localhost:${PORT}/worker_Dashboard_2.html`);
+    console.log(`  API Status:       http://localhost:${PORT}/api/stats`);
+    console.log(`======================================================\n`);
+  });
+}
 
 module.exports = app;
